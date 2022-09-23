@@ -1,0 +1,7 @@
+[user]
+    email = john.doe@company.com
+    name = John Doe
+
+[http "https://github.com"]
+   proxy = http://proxy:8080/
+
