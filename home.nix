@@ -42,9 +42,11 @@
   };
 
   # Install the gitconfig file, as .gitconfig in the home directory
-  # home.file = {
-  #   ".gitconfig-work".source = ./gitconfig-work;
-  # };
+  home.file = {
+    ".config/rofi/theme.rasi".source = ./rofi/theme.rasi;
+    ".config/rofi/colors.rasi".source = ./rofi/colors.rasi;
+  # ".gitconfig-work".source = ./gitconfig-work;
+  };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
@@ -67,6 +69,12 @@
     theme = "Nord";
   };
 
+  programs.rofi = {
+    enable = true;
+    cycle = true;
+    theme = ".config/rofi/theme.rasi";
+  };
+
   programs.git = {
     enable = true;
     difftastic.enable = true;
@@ -78,10 +86,10 @@
       core.quotePath = false;
     };
     includes = [
-      {
-        path = "~/.gitconfig-work";
-        condition = "gitdir:~/ORANGE/";
-      }
+      # {
+      #   path = "~/.gitconfig-work";
+      #   condition = "gitdir:~/ORANGE/";
+      # }
     ];
   };
 
