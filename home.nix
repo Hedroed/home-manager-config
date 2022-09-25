@@ -1,10 +1,14 @@
 { config, pkgs, ... }:
+let
 
-{
+  username = "hedroed";
+  homeDirectory = "/home/${username}";
+
+in {
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
-  home.username = "hedroed";
-  home.homeDirectory = "/home/hedroed";
+  home.username = username;
+  home.homeDirectory = homeDirectory;
 
   home.packages = with pkgs; [
     # utils
@@ -17,6 +21,9 @@
     unzip
     ripgrep
     vim
+
+    # programming
+    python310
 
     # nix
     nixpkgs-fmt
@@ -48,6 +55,10 @@
   # ".gitconfig-work".source = ./gitconfig-work;
   };
 
+  home.shellAliases = {
+    open = "xdg-open";
+  };
+
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
@@ -72,7 +83,7 @@
   programs.rofi = {
     enable = true;
     cycle = true;
-    theme = ".config/rofi/theme.rasi";
+    theme = "theme.rasi";
   };
 
   programs.git = {
@@ -102,6 +113,12 @@
     if [ -e ~/.nix-profile/etc/profile.d/nix.sh ]; then
       source ~/.nix-profile/etc/profile.d/nix.sh
     fi
+
+    # Virtualenv wrapper
+    export WORKON_HOME=~/.virtualenvs
+    export VIRTUALENVWRAPPER_PYTHON=${pkgs.python310}/bin/python
+    mkdir -p $WORKON_HOME
+    source ${pkgs.python310Packages.virtualenvwrapper}/bin/virtualenvwrapper.sh
     '';
 
     oh-my-zsh = {
@@ -111,7 +128,6 @@
           "sudo"
           "docker"
           "common-aliases"
-          "virtualenv"
           "autojump"
         ];
       };
@@ -127,6 +143,17 @@
 
   fonts.fontconfig = {
     enable = true;
+  };
+
+  services.screen-locker = {
+    enable = true;
+    lockCmd = "${homeDirectory}/.local/bin/i3lock -n -c 000000";
+    inactiveInterval = 5;
+    xautolock.enable = false;
+    xss-lock = {
+      extraOptions = ["-n" "${pkgs.xsecurelock}/libexec/xsecurelock/dimmer" "-l"];
+      screensaverCycle = 305;
+    };
   };
 
   services.gpg-agent = {
