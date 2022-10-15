@@ -33,6 +33,8 @@ in {
     (nerdfonts.override { fonts = [ "FiraCode" ]; })
   ];
 
+  home.sessionPath = [ "$HOME/.local/bin" ];
+
   xsession.enable = true;
   xsession.windowManager.command = "i3";
 
