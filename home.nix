@@ -1,12 +1,14 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, inputs, system, ... }:
 let
 
   username = "hedroed";
   homeDirectory = "/home/${username}";
 
+  goldevalley = inputs.goldvalley.defaultPackage.${system};
+
   lockBin = pkgs.writeShellScriptBin "locker"
     ''
-    ${inputs.goldvalley}/bin/goldvalley -o /tmp/lockscreen.png
+    ${goldevalley}/bin/goldvalley -o /tmp/lockscreen.png
 
     ${homeDirectory}/.local/bin/i3lock -n -c 000000 -i /tmp/lockscreen.png
     '';
@@ -29,7 +31,8 @@ in {
     ripgrep
     vim
 
-    inputs.goldvalley
+    goldevalley
+    lockBin
 
     # programming
     python310

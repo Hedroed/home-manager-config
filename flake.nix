@@ -30,6 +30,7 @@
           inputs = {
             inherit goldvalley;
           };
+          inherit system;
         };
 
         # Specify your home configuration modules here
