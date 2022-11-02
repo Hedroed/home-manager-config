@@ -10,9 +10,14 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    goldvalley = {
+      url = "github:hedroed/goldvalley";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { home-manager, nixpkgs, ... }:
+  outputs = { home-manager, nixpkgs, goldvalley, ... }:
     let
       system = "x86_64-linux";
       username = "hedroed";
@@ -20,6 +25,12 @@
     in {
       homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
+
+        extraSpecialArgs = {
+          inputs = {
+            inherit goldvalley;
+          };
+        };
 
         # Specify your home configuration modules here
         modules = [

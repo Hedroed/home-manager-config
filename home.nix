@@ -1,8 +1,15 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 let
 
   username = "hedroed";
   homeDirectory = "/home/${username}";
+
+  lockBin = pkgs.writeShellScriptBin "locker"
+    ''
+    ${inputs.goldvalley}/bin/goldvalley -o /tmp/lockscreen.png
+
+    ${homeDirectory}/.local/bin/i3lock -n -c 000000 -i /tmp/lockscreen.png
+    '';
 
 in {
   # Home Manager needs a bit of information about you and the
@@ -21,6 +28,8 @@ in {
     unzip
     ripgrep
     vim
+
+    inputs.goldvalley
 
     # programming
     python310
@@ -152,7 +161,7 @@ in {
 
   services.screen-locker = {
     enable = true;
-    lockCmd = "${homeDirectory}/.local/bin/i3lock -n -c 000000";
+    lockCmd = "${lockBin}/bin/locker";
     inactiveInterval = 5;
     xautolock.enable = false;
     xss-lock = {
