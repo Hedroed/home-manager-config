@@ -4,7 +4,7 @@ let
   username = "hedroed";
   homeDirectory = "/home/${username}";
 
-  goldevalley = inputs.goldvalley.defaultPackage.${system};
+  goldevalley = inputs.goldvalley.packages.${system}.default;
 
   lockBin = pkgs.writeShellScriptBin "locker"
     ''
