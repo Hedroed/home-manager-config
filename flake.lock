@@ -66,11 +66,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1667676622,
-        "narHash": "sha256-gGNe17JQN+5NV3PNaEkax7+ze9XAd4wBUzg9vBNiJXk=",
+        "lastModified": 1667676838,
+        "narHash": "sha256-Y+YAIRmPjX1ucI8vc966IFmkxq7Ua/GBN8or3DuNajU=",
         "owner": "hedroed",
         "repo": "goldvalley",
-        "rev": "d3ec156b9ec8b68ed7bdd521abff3d40c955a450",
+        "rev": "ed498aad54bedee5e660f61fa0ff5048e663c80c",
         "type": "github"
       },
       "original": {
