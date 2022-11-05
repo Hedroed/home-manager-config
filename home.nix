@@ -229,11 +229,10 @@ in {
           mixer_idx = 0;
         };
       };
-      "tztime local" = {
+      "time" = {
         position = 8;
         settings = {
-          format = "<span background='#88c0d0'>  </span><span background='#e5e9f0'> %time </span>";
-          format_time = "%a %-d %b %H:%M %s";
+          format = "<span background='#88c0d0'>  </span><span background='#e5e9f0'> %a %-d %b %H:%M %s </span>";
         };
       };
     };
