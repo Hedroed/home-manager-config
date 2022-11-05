@@ -340,6 +340,9 @@ in {
       };
       keybindings = lib.mkOptionDefault {
         "${modifier}+Shift+q" = "kill";
+        "${modifier}+l" = "xset s activate";
+        "${modifier}+Shift+space" = "focus mode_toggle";
+        "${modifier}+space" = "floating toggle";
       };
       terminal = "kitty";
       startup = [
