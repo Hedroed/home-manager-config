@@ -13,6 +13,27 @@ let
     ${homeDirectory}/.local/bin/i3lock -n -c 000000 -i /tmp/lockscreen.png
     '';
 
+
+  c = {
+    dark1 = "#2E3440";
+    dark2 = "#3B4252";
+    dark3 = "#434C5E";
+    dark4 = "#4C566A";
+    white1 = "#D8DEE9";
+    white2 = "#E5E9F0";
+    white3 = "#ECEFF4";
+    blue1 = "#8FBCBB";
+    blue2 = "#88C0D0";
+    blue3 = "#81A1C1";
+    blue4 = "#5E81AC";
+    red = "#BF616A";
+    orange = "#D08770";
+    yellow = "#EBCB8B";
+    green = "#A3BE8C";
+    purple = "#B48EAD";
+    extra1 = "#ff79c6";
+  };
+
 in {
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
@@ -171,49 +192,49 @@ in {
       markup = "pango";
       interval = 1;
       colors = false;
-      color_good = "#BF616A";
-      color_bad = "#88C0D0";
-      color_degraded = "#5E81AC";
+      color_good = "${c.red}";
+      color_bad = "${c.blue2}";
+      color_degraded = "${c.blue4}";
     };
     modules = {
       "cpu_temperature 0" = {
         position = 1;
         settings = {
-          format = "<span background='#bf616a'>  </span><span background='#e5e9f0'> %degrees °C </span>";
+          format = "<span background='${c.red}'>  </span><span background='${c.white2}'> %degrees °C </span>";
           path = "/sys/class/thermal/thermal_zone0/temp";
         };
       };
       "load" = {
         position = 2;
         settings = {
-          format = "<span background='#d08770'>  </span><span background='#e5e9f0'> %5min Load </span>";
+          format = "<span background='${c.orange}'>  </span><span background='${c.white2}'> %5min Load </span>";
         };
       };
       "disk /" = {
         position = 3;
         settings = {
-          format = "<span background='#ebcb8b'>  </span><span background='#e5e9f0'> %free Free </span>";
+          format = "<span background='${c.yellow}'>  </span><span background='${c.white2}'> %free Free </span>";
         };
       };
       "ethernet _first_" = {
         position = 4;
         settings = {
-          format_up = "<span background='#b48ead'>  </span><span background='#e5e9f0'> %ip </span>";
-          format_down = "<span background='#b48ead'>  </span><span background='#e5e9f0'> Disconnected </span>";
+          format_up = "<span background='${c.purple}'>  </span><span background='${c.white2}'> %ip </span>";
+          format_down = "<span background='${c.purple}'>  </span><span background='${c.white2}'> Disconnected </span>";
         };
       };
       "wireless _first_" = {
         position = 5;
         settings = {
-          format_up = "<span background='#b48ead'>  </span><span background='#e5e9f0'> %ip </span>";
-          format_down = "<span background='#b48ead'>  </span><span background='#e5e9f0'> Disconnected </span>";
+          format_up = "<span background='${c.purple}'>  </span><span background='${c.white2}'> %ip </span>";
+          format_down = "<span background='${c.purple}'>  </span><span background='${c.white2}'> Disconnected </span>";
         };
       };
       "battery all" = {
         position = 6;
         settings = {
-          format = "<span background='#a3be8c'> %status </span><span background='#e5e9f0'> %percentage Bat </span>";
-          format_down = "<span background='#a3be8c'></span><span background='#e5e9f0'> No battery </span>";
+          format = "<span background='${c.green}'> %status </span><span background='${c.white2}'> %percentage Bat </span>";
+          format_down = "<span background='${c.green}'></span><span background='${c.white2}'> No battery </span>";
           last_full_capacity = true;
           integer_battery_capacity = true;
           status_chr = "";
@@ -227,8 +248,8 @@ in {
       "volume master" = {
         position = 7;
         settings = {
-          format = "<span background='#ff79c6'>  </span><span background='#e5e9f0'> %volume </span>";
-          format_muted = "<span background='#ff79c6'>  </span><span background='#e5e9f0'> Muted </span>";
+          format = "<span background='${c.extra1}'>  </span><span background='${c.white2}'> %volume </span>";
+          format_muted = "<span background='${c.extra1}'>  </span><span background='${c.white2}'> Muted </span>";
           device = "default";
           mixer = "Master";
           mixer_idx = 0;
@@ -237,7 +258,7 @@ in {
       "time" = {
         position = 8;
         settings = {
-          format = "<span background='#88c0d0'>  </span><span background='#e5e9f0'> %Y-%m-%d %H:%M:%S %s </span>";
+          format = "<span background='${c.blue2}'>  </span><span background='${c.white2}'> %Y-%m-%d %H:%M:%S %s </span>";
         };
       };
     };
@@ -271,15 +292,15 @@ in {
       modifier = "Mod4";
       bars = [{
         colors = {
-          background = "$base00";
-          separator  = "$base00";
-          statusline = "$base02";
+          background = "${c.dark1}";
+          separator  = "${c.dark1}";
+          statusline = "${c.dark3}";
 
-          focusedWorkspace  = { background = "$base05"; border = "$base0D"; text = "$base00"; };
-          activeWorkspace   = { background = "$base05"; border = "$base03"; text = "$base00"; };
-          inactiveWorkspace = { background = "$base03"; border = "$base01"; text = "$base05"; };
-          urgentWorkspace   = { background = "$base08"; border = "$base08"; text = "$base00"; };
-          bindingMode       = { background = "$base00"; border = "$base0A"; text = "$base00"; };
+          focusedWorkspace  = { background = "${c.white2}"; border = "${c.yellow}"; text = "${c.dark1}"; };
+          activeWorkspace   = { background = "${c.white2}"; border = "${c.dark4}"; text = "${c.dark1}"; };
+          inactiveWorkspace = { background = "${c.dark4}"; border = "${c.dark2}"; text = "${c.white2}"; };
+          urgentWorkspace   = { background = "${c.blue2}"; border = "${c.blue2}"; text = "${c.dark1}"; };
+          bindingMode       = { background = "${c.dark1}"; border = "${c.blue4}"; text = "${c.dark1}"; };
         };
         # command = "${pkgs.i3-gaps}/bin/i3bar -t";
         statusCommand = "${pkgs.i3status}/bin/i3status";
@@ -291,13 +312,13 @@ in {
         trayOutput = "primary";
       }];
       colors = {
-        focused         = { background = "$base02"; border = "$base02"; childBorder = "$base06"; indicator = "$base0C"; text = "$base02"; };
-        focusedInactive = { background = "$base01"; border = "$base01"; childBorder = "$base04"; indicator = "$base03"; text = "$base01"; };
-        unfocused       = { background = "$base01"; border = "$base00"; childBorder = "$base04"; indicator = "$base01"; text = "$base01"; };
-        urgent          = { background = "$base08"; border = "$base08"; childBorder = "$base00"; indicator = "$base08"; text = "$base08"; };
-        placeholder     = { background = "$base00"; border = "$base00"; childBorder = "$base06"; indicator = "$base00"; text = "$base00"; };
+        focused         = { background = "${c.dark3}"; border = "${c.dark3}"; childBorder = "${c.white3}"; indicator = "${c.orange}"; text = "${c.dark3}"; };
+        focusedInactive = { background = "${c.dark2}"; border = "${c.dark2}"; childBorder = "${c.white1}"; indicator = "${c.dark4}"; text = "${c.dark2}"; };
+        unfocused       = { background = "${c.dark2}"; border = "${c.dark1}"; childBorder = "${c.white1}"; indicator = "${c.dark2}"; text = "${c.dark2}"; };
+        urgent          = { background = "${c.blue2}"; border = "${c.blue2}"; childBorder = "${c.dark1}"; indicator = "${c.blue2}"; text = "${c.blue2}"; };
+        placeholder     = { background = "${c.dark1}"; border = "${c.dark1}"; childBorder = "${c.white3}"; indicator = "${c.dark1}"; text = "${c.dark1}"; };
 
-        background       = "$base07";
+        background       = "${c.blue1}";
       };
       floating = {
         border = 2;
