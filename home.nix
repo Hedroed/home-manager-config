@@ -20,6 +20,11 @@ in {
   home.homeDirectory = homeDirectory;
 
   home.packages = with pkgs; [
+    kitty
+    firefox
+    xfce.thunar
+    xfce.thunar-volman
+
     # utils
     coreutils
     inetutils
@@ -30,8 +35,6 @@ in {
     unzip
     ripgrep
     vim
-
-    kitty
 
     goldevalley
     lockBin
@@ -338,11 +341,38 @@ in {
         smartBorders = "on";
         smartGaps = true;
       };
+      menu = "${pkgs.rofi}/bin/rofi -show drun";
       keybindings = lib.mkOptionDefault {
         "${modifier}+Shift+q" = "kill";
-        "${modifier}+l" = "xset s activate";
+        "${modifier}+l" = "exec xset s activate";
         "${modifier}+Shift+space" = "focus mode_toggle";
         "${modifier}+space" = "floating toggle";
+        "${modifier}+p" = "mode \"$system_action\"";
+        "${modifier}+F2" = "exec firefox";
+        "${modifier}+F3" = "exec thunar";
+      };
+      modes = {
+        resize = {
+          Escape = "mode default";
+          Return = "mode default";
+          Down = "resize grow height 10 px or 10 ppt";
+          Left = "resize shrink width 10 px or 10 ppt";
+          Right = "resize grow width 10 px or 10 ppt";
+          Up = "resize shrink height 10 px or 10 ppt";
+        };
+        "$system_action" = {
+          Escape = "mode default";
+          Return = "mode default";
+          l = "exec --no-startup-id i3exit lock, mode \"default\"";
+          s = "exec --no-startup-id i3exit suspend, mode \"default\"";
+          e = "exec --no-startup-id i3exit logout, mode \"default\"";
+          r = "exec --no-startup-id i3exit reboot, mode \"default\"";
+          "Shift+s" = "exec --no-startup-id i3exit shutdown, mode \"default\"";
+        };
+      };
+      window = {
+        border = 1;
+        titlebar = false;
       };
       terminal = "kitty";
       startup = [
@@ -356,6 +386,7 @@ in {
       workspaceAutoBackAndForth = true;
     };
     extraConfig = ''
+      set $system_action (l)ock, (e)xit, (s)uspend, (r)eboot, (Shift+s)hutdown
       set $base00 #2E3440
       set $base01 #3B4252
       set $base02 #434C5E
