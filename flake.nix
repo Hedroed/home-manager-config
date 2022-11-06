@@ -17,18 +17,22 @@
     };
   };
 
-  outputs = { home-manager, nixpkgs, goldvalley, ... }:
+  outputs = { home-manager, nixpkgs, ... }@inputs:
     let
       system = "x86_64-linux";
       username = "hedroed";
       pkgs = nixpkgs.legacyPackages.${system};
+
+      lucide = import ./lucide_font { inherit pkgs; };
+
     in {
       homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
 
         extraSpecialArgs = {
           inputs = {
-            inherit goldvalley;
+            inherit (inputs) goldvalley;
+            inherit lucide;
           };
           inherit system;
         };

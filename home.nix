@@ -48,6 +48,7 @@ in {
     # fonts
     fontconfig
     (nerdfonts.override { fonts = [ "FiraCode" ]; })
+    inputs.lucide
   ];
 
   home.sessionPath = [ "$HOME/.local/bin" ];
@@ -164,6 +165,7 @@ in {
 
   programs.i3status = {
     enable = true;
+    enableDefault = false;
     general = {
       output_format = "i3bar";
       markup = "pango";
@@ -235,7 +237,7 @@ in {
       "time" = {
         position = 8;
         settings = {
-          format = "<span background='#88c0d0'>  </span><span background='#e5e9f0'> %a %-d %b %H:%M %s </span>";
+          format = "<span background='#88c0d0'>  </span><span background='#e5e9f0'> %Y-%m-%d %H:%M:%S %s </span>";
         };
       };
     };
