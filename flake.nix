@@ -15,15 +15,18 @@
       url = "github:hedroed/goldvalley";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    hyprland.url = "github:hyprwm/Hyprland/v0.23.0beta";
   };
 
-  outputs = { home-manager, nixpkgs, ... }@inputs:
+  outputs = { home-manager, nixpkgs, hyprland, ... }@inputs:
     let
       system = "x86_64-linux";
       username = "hedroed";
       pkgs = nixpkgs.legacyPackages.${system};
 
       lucide = import ./lucide_font { inherit pkgs; };
+
 
     in {
       homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
@@ -39,7 +42,9 @@
 
         # Specify your home configuration modules here
         modules = [
+          hyprland.homeManagerModules.default
           ./home.nix
+          ./hyprland.nix
         ];
 
         # Optionally use extraSpecialArgs

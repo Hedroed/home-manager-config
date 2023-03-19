@@ -13,7 +13,6 @@ let
     ${homeDirectory}/.local/bin/i3lock -n -c 000000 -i /tmp/lockscreen.png
     '';
 
-
   c = {
     dark1 = "#2E3440";
     dark2 = "#3B4252";
@@ -296,11 +295,11 @@ in {
           separator  = "${c.dark1}";
           statusline = "${c.dark3}";
 
-          focusedWorkspace  = { background = "${c.white2}"; border = "${c.yellow}"; text = "${c.dark1}"; };
-          activeWorkspace   = { background = "${c.white2}"; border = "${c.dark4}"; text = "${c.dark1}"; };
-          inactiveWorkspace = { background = "${c.dark4}"; border = "${c.dark2}"; text = "${c.white2}"; };
-          urgentWorkspace   = { background = "${c.blue2}"; border = "${c.blue2}"; text = "${c.dark1}"; };
-          bindingMode       = { background = "${c.dark1}"; border = "${c.blue4}"; text = "${c.dark1}"; };
+          focusedWorkspace  = { border = "${c.white2}"; background = "${c.yellow}"; text = "${c.dark1}"; };
+          activeWorkspace   = { border = "${c.white2}"; background = "${c.dark4}"; text = "${c.dark1}"; };
+          inactiveWorkspace = { border = "${c.dark4}"; background = "${c.dark2}"; text = "${c.white2}"; };
+          urgentWorkspace   = { border = "${c.blue2}"; background = "${c.blue2}"; text = "${c.dark1}"; };
+          bindingMode       = { border = "${c.dark1}"; background = "${c.blue4}"; text = "${c.dark1}"; };
         };
         # command = "${pkgs.i3-gaps}/bin/i3bar -t";
         statusCommand = "${pkgs.i3status}/bin/i3status";
@@ -312,11 +311,11 @@ in {
         trayOutput = "primary";
       }];
       colors = {
-        focused         = { background = "${c.dark3}"; border = "${c.dark3}"; childBorder = "${c.white3}"; indicator = "${c.orange}"; text = "${c.dark3}"; };
-        focusedInactive = { background = "${c.dark2}"; border = "${c.dark2}"; childBorder = "${c.white1}"; indicator = "${c.dark4}"; text = "${c.dark2}"; };
-        unfocused       = { background = "${c.dark2}"; border = "${c.dark1}"; childBorder = "${c.white1}"; indicator = "${c.dark2}"; text = "${c.dark2}"; };
-        urgent          = { background = "${c.blue2}"; border = "${c.blue2}"; childBorder = "${c.dark1}"; indicator = "${c.blue2}"; text = "${c.blue2}"; };
-        placeholder     = { background = "${c.dark1}"; border = "${c.dark1}"; childBorder = "${c.white3}"; indicator = "${c.dark1}"; text = "${c.dark1}"; };
+        focused         = { background = "${c.dark3}"; border = "${c.dark3}"; text = "${c.white3}"; indicator = "${c.orange}"; childBorder = "${c.dark3}"; };
+        focusedInactive = { background = "${c.dark2}"; border = "${c.dark2}"; text = "${c.white1}"; indicator = "${c.dark4}"; childBorder = "${c.dark2}"; };
+        unfocused       = { background = "${c.dark2}"; border = "${c.dark1}"; text = "${c.white1}"; indicator = "${c.dark2}"; childBorder = "${c.dark2}"; };
+        urgent          = { background = "${c.blue2}"; border = "${c.blue2}"; text = "${c.dark1}"; indicator = "${c.blue2}"; childBorder = "${c.blue2}"; };
+        placeholder     = { background = "${c.dark1}"; border = "${c.dark1}"; text = "${c.white3}"; indicator = "${c.dark1}"; childBorder = "${c.dark1}"; };
 
         background       = "${c.blue1}";
       };
@@ -370,9 +369,36 @@ in {
         "${modifier}+l" = "exec xset s activate";
         "${modifier}+Shift+space" = "focus mode_toggle";
         "${modifier}+space" = "floating toggle";
-        "${modifier}+p" = "mode \"$system_action\"";
+        "${modifier}+equal" = "mode \"$system_action\"";
         "${modifier}+F2" = "exec firefox";
         "${modifier}+F3" = "exec thunar";
+        # Move focused container to workspace
+        "${modifier}+Ctrl+1" = "move container to workspace number 1";
+        "${modifier}+Ctrl+2" = "move container to workspace number 2";
+        "${modifier}+Ctrl+3" = "move container to workspace number 3";
+        "${modifier}+Ctrl+4" = "move container to workspace number 4";
+        "${modifier}+Ctrl+5" = "move container to workspace number 5";
+        "${modifier}+Ctrl+6" = "move container to workspace number 6";
+        "${modifier}+Ctrl+7" = "move container to workspace number 7";
+        "${modifier}+Ctrl+8" = "move container to workspace number 8";
+        "${modifier}+Ctrl+9" = "move container to workspace number 9";
+        "${modifier}+Ctrl+0" = "move container to workspace number 10";
+        # Move to workspace with focused container
+        "${modifier}+Shift+1" = "move container to workspace number 1; workspace number 1";
+        "${modifier}+Shift+2" = "move container to workspace number 2; workspace number 2";
+        "${modifier}+Shift+3" = "move container to workspace number 3; workspace number 3";
+        "${modifier}+Shift+4" = "move container to workspace number 4; workspace number 4";
+        "${modifier}+Shift+5" = "move container to workspace number 5; workspace number 5";
+        "${modifier}+Shift+6" = "move container to workspace number 6; workspace number 6";
+        "${modifier}+Shift+7" = "move container to workspace number 7; workspace number 7";
+        "${modifier}+Shift+8" = "move container to workspace number 8; workspace number 8";
+        "${modifier}+Shift+9" = "move container to workspace number 9; workspace number 9";
+        "${modifier}+Shift+0" = "move container to workspace number 10; workspace number 10";
+        # move the currently focused window to the scratchpad
+        "${modifier} + Shift + parenright" = "move scratchpad";
+        # Show the next scratchpad window or hide the focused scratchpad window.
+        # If there are multiple scratchpad windows, this command cycles through them.
+        "${modifier} + parenright" = "scratchpad show";
       };
       modes = {
         resize = {
