@@ -45,6 +45,8 @@ in {
     xfce.thunar
     xfce.thunar-volman
 
+    vscode
+
     # utils
     coreutils
     inetutils
@@ -150,7 +152,6 @@ in {
     enable = true;
 
     initExtra = ''
-
     # Nix setup
     if [ -e ~/.nix-profile/etc/profile.d/nix.sh ]; then
       source ~/.nix-profile/etc/profile.d/nix.sh
@@ -261,6 +262,11 @@ in {
         };
       };
     };
+  };
+
+  programs.vscode = {
+    enable = true;
+    userSettings = builtins.fromJSON (builtins.readFile ./vscode.json);
   };
 
   fonts.fontconfig = {
