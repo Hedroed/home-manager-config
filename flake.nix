@@ -23,7 +23,11 @@
     let
       system = "x86_64-linux";
       username = "hedroed";
-      pkgs = nixpkgs.legacyPackages.${system};
+      # pkgs = nixpkgs.legacyPackages.${system};
+      pkgs = import nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+      };
 
       lucide = import ./lucide_font { inherit pkgs; };
 

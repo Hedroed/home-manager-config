@@ -68,7 +68,6 @@ in {
     nixpkgs-fmt
     
     # fonts
-    fontconfig
     (nerdfonts.override { fonts = [ "FiraCode" ]; })
     inputs.lucide
   ];
@@ -264,10 +263,7 @@ in {
     };
   };
 
-  programs.vscode = {
-    enable = true;
-    userSettings = builtins.fromJSON (builtins.readFile ./vscode.json);
-  };
+  programs.vscode = import ./vscode.nix { inherit pkgs; };
 
   fonts.fontconfig = {
     enable = true;
