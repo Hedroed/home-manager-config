@@ -3,7 +3,7 @@
 let
   font = "'FiraCode Nerd Font Mono', monospace";
   colorTheme = "Nord";
-  iconTheme = "vscode-icons";
+  iconTheme = "material-icon-theme";
 
   inherit (pkgs.vscode-utils) buildVscodeMarketplaceExtension;
 
@@ -14,53 +14,25 @@ let
     };
 
   myExtensions = {
-    nickel = (extension {
-      publisher = "kubukoz";
-      name = "nickel-syntax";
-      version = "0.0.2";
-      sha256 = "sha256-ffPZd717Y2OF4d9MWE6zKwcsGWS90ZJvhWkqP831tVM=";
+    textPastry = (extension {
+      publisher = "jkjustjoshing";
+      name = "vscode-text-pastry";
+      version = "1.3.1";
+      sha256 = "0rihsvabsxhjcf639qplriwp45vd1ni8ab047nipdwg992rrif1i";
     });
 
-    nix = (extension {
-      publisher = "bbenoist";
-      name = "nix";
-      version = "1.0.1";
-      sha256 = "sha256-qwxqOGublQeVP2qrLF94ndX/Be9oZOn+ZMCFX1yyoH0=";
+    spellCheckerFrench = (extension {
+      publisher = "streetsidesoftware";
+      name = "code-spell-checker-french";
+      version = "0.3.1";
+      sha256 = "1zsgwcx3fd7gh70i6l0vzsyj7hk9ygxlazax9icy0y4ygckrg5qv";
     });
 
-    nixpkgs-fmt = (extension {
-      publisher = "B4dM4n";
-      name = "nixpkgs-fmt";
-      version = "0.0.1";
-      sha256 = "sha256-vz2kU36B1xkLci2QwLpl/SBEhfSWltIDJ1r7SorHcr8=";
-    });
-
-    nushell = (extension {
-      publisher = "TheNuProjectContributors";
-      name = "vscode-nushell-lang";
-      version = "1.0.0";
-      sha256 = "sha256-2FHAFh4ipYKegir7o59Ypb78MOzy2iu+3p3aUUgsatw=";
-    });
-
-    oil = (extension {
-      publisher = "karino2";
-      name = "oilshell-extension";
-      version = "1.3.0";
-      sha256 = "sha256-rUAHB8rdUHh2G+2Fp8F7Pwmie+43PSWr9pLFfpj1cyw=";
-    });
-
-    opa = (extension {
-      publisher = "tsandall";
-      name = "opa";
-      version = "0.12.1";
-      sha256 = "sha256-HoFX0pNTbL4etkmZVvezmL0vKE54QZtIPjcAp2/llqs=";
-    });
-
-    unison = (extension {
-      publisher = "benfradet";
-      name = "vscode-unison";
-      version = "0.4.0";
-      sha256 = "sha256-IDM9v+LWckf20xnRTj+ThAFSzVxxDVQaJkwO37UIIhs=";
+    atomKeymap = (extension {
+      publisher = "ms-vscode";
+      name = "atom-keybindings";
+      version = "3.3.0";
+      sha256 = "12hkb2lm9c94b5y6zaxk6ajwx9q78c5jd46brm685qqm6py9ncxz";
     });
   };
 in
@@ -68,24 +40,23 @@ in
   enable = true;
   enableExtensionUpdateCheck = true;
   enableUpdateCheck = true;
-  # extensions = (with myExtensions; [
-  #   nickel
-  #   nix
-  #   nixpkgs-fmt
-  #   nushell
-  #   oil
-  #   opa
-  #   unison
-  # ]) ++ (
-  extensions = with pkgs.vscode-extensions; [
+  extensions = (with myExtensions; [
+    textPastry
+    spellCheckerFrench
+    atomKeymap
+  ]) ++ (with pkgs.vscode-extensions; [
     rust-lang.rust-analyzer
     ms-python.vscode-pylance
     bbenoist.nix
     elmtooling.elm-ls-vscode
     eamodio.gitlens
+    mhutchie.git-graph
     arcticicestudio.nord-visual-studio-code
+    pkief.material-icon-theme
     naumovs.color-highlight
-  ];
+    bradlc.vscode-tailwindcss
+    streetsidesoftware.code-spell-checker
+  ]);
 
   userSettings = {
     "workbench.startupEditor" = "newUntitledFile";
@@ -96,16 +67,17 @@ in
     "window.titleBarStyle" = "native";
     "breadcrumbs.enabled" = true;
 
+    "editor.fontFamily" = font;
+    "editor.fontSize" = 15;
+    "editor.fontLigatures" = true;
+    "editor.wordWrap" = "on";
     "editor.multiCursorModifier" = "ctrlCmd";
     "editor.renderWhitespace" = "boundary";
-    "editor.fontSize" = 15;
     "editor.detectIndentation" = false;
     "editor.tabSize" = 4;
     "editor.insertSpaces" = true;
     "editor.minimap.enabled" = false;
-    "editor.fontLigatures" = true;
     "editor.formatOnPaste" = false;
-    "editor.wordWrap" = "on";
     "editor.formatOnSave" = false;
     "editor.quickSuggestions" = {
         "strings" = true;
@@ -113,7 +85,8 @@ in
     "editor.inlayHints.enabled" = "onUnlessPressed";
     "editor.rulers" = [ 80 100 ];
 
-    "cSpell.language" = "en,en-GB,en-US,fr,fr-FR";
+    "telemetry.telemetryLevel" = "all";
+    "cSpell.language" = "en,en-US,fr,fr-FR";
 
     "explorer.confirmDelete" = false;
     "explorer.confirmDragAndDrop" = false;
@@ -140,9 +113,6 @@ in
     "gitlens.showWhatsNewAfterUpgrades" = false;
     "gitlens.showWelcomeOnInstall" = false;
     "gitlens.plusFeatures.enabled" = false;
-
-    "vsicons.dontShowNewVersionMessage" = true;
-    "atomKeymap.promptV3Features" = true;
 
     "python.formatting.autopep8Args" = [
         "--max-line-length=160"
