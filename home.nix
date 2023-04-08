@@ -90,7 +90,6 @@ in {
     EDITOR = "vim";
     SUDO_EDITOR = "vim";
     XDG_DATA_DIRS = "${homeDirectory}/.nix-profile/share:${homeDirectory}/.local/share:/usr/share";
-    GTK_THEME = "Nordic";
   };
 
   # Install the gitconfig file, as .gitconfig in the home directory
@@ -98,6 +97,12 @@ in {
     ".config/rofi/theme.rasi".source = ./rofi/theme.rasi;
     ".config/rofi/colors.rasi".source = ./rofi/colors.rasi;
   # ".gitconfig-work".source = ./gitconfig-work;
+    ".icons/Nordzy-cursors".source = "${pkgs.nordzy-cursor-theme}/share/icons/Nordzy-cursors";
+    ".local/share/icons/Nordzy-cursors".source = "${pkgs.nordzy-cursor-theme}/share/icons/Nordzy-cursors";
+    ".icons/Nordzy-dark".source = "${pkgs.nordzy-icon-theme}/share/icons/Nordzy-dark";
+    ".local/share/icons/Nordzy-dark".source = "${pkgs.nordzy-icon-theme}/share/icons/Nordzy-dark";
+    ".themes/Nordic".source = "${pkgs.nordic}/share/themes/Nordic";
+    ".local/share/themes/Nordic".source = "${pkgs.nordic}/share/themes/Nordic";
   };
 
   home.shellAliases = {
@@ -432,12 +437,12 @@ in {
       };
       terminal = "${nixgl}/bin/nixGL ${pkgs.kitty}/bin/kitty";
       startup = [
-        { command = "picom -b"; }
-        { command = "dunst"; }
-        { command = "nitrogen --restore"; }
-        { command = "nm-applet"; }
-        { command = "xfce4-power-manager"; }
-        { command = "clipit"; }
+        { command = "picom -b"; notification = false; }
+        { command = "dunst"; notification = false; }
+        { command = "nitrogen --restore"; notification = false; }
+        { command = "nm-applet"; notification = false; }
+        { command = "xfce4-power-manager"; notification = false; }
+        { command = "clipit"; notification = false; }
       ];
       workspaceAutoBackAndForth = true;
     };
