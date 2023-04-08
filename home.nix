@@ -4,11 +4,12 @@ let
   username = "hedroed";
   homeDirectory = "/home/${username}";
 
-  goldevalley = inputs.goldvalley.packages.${system}.default;
+  goldvalley = inputs.goldvalley.packages.${system}.default;
+  nixgl = inputs.nixgl.packages.${system}.default;
 
   lockBin = pkgs.writeShellScriptBin "locker"
     ''
-    ${goldevalley}/bin/goldvalley -o /tmp/lockscreen.png
+    ${goldvalley}/bin/goldvalley -o /tmp/lockscreen.png
 
     ${homeDirectory}/.local/bin/i3lock -n -c 000000 -i /tmp/lockscreen.png
     '';
@@ -45,8 +46,6 @@ in {
     xfce.thunar
     xfce.thunar-volman
 
-    vscode
-
     # utils
     coreutils
     inetutils
@@ -58,7 +57,7 @@ in {
     ripgrep
     vim
 
-    goldevalley
+    goldvalley
     lockBin
 
     # programming
@@ -66,18 +65,19 @@ in {
 
     # nix
     nixpkgs-fmt
-    
+    nixgl
+
     # fonts
     (nerdfonts.override { fonts = [ "FiraCode" ]; })
     inputs.lucide
+    noto-fonts
+    noto-fonts-emoji
   ];
 
   home.sessionPath = [ "$HOME/.local/bin" ];
 
-  xsession.enable = true;
-
   # This value determines the Home Manager release that your
-  # configuration is compatible with. This helps avoid breakage
+  # configuration is nixglcompatible with. This helps avoid breakage
   # when a new Home Manager release introduces backwards
   # incompatible changes.
   #
@@ -89,6 +89,8 @@ in {
   home.sessionVariables = {
     EDITOR = "vim";
     SUDO_EDITOR = "vim";
+    XDG_DATA_DIRS = "${homeDirectory}/.nix-profile/share:${homeDirectory}/.local/share:/usr/share";
+    GTK_THEME = "Nordic";
   };
 
   # Install the gitconfig file, as .gitconfig in the home directory
@@ -264,6 +266,7 @@ in {
   };
 
   programs.vscode = import ./vscode.nix { inherit pkgs; };
+  programs.firefox = import ./firefox.nix { };
 
   fonts.fontconfig = {
     enable = true;
@@ -286,6 +289,8 @@ in {
     enableSshSupport = true;
   };
 
+  xsession.enable = true;
+  xsession.profileExtra = ". ${homeDirectory}/.nix-profile/etc/profile.d/nix.sh";
   xsession.windowManager.i3 = {
     enable = true;
     package = pkgs.i3-gaps;
@@ -425,7 +430,7 @@ in {
         border = 1;
         titlebar = false;
       };
-      terminal = "kitty";
+      terminal = "${nixgl}/bin/nixGL ${pkgs.kitty}/bin/kitty";
       startup = [
         { command = "picom -b"; }
         { command = "dunst"; }
@@ -455,5 +460,19 @@ in {
       set $base0E #A3BE8C
       set $base0F #B48EAD
     '';
+  };
+
+  qt.enable = true;
+  qt.platformTheme = "gtk";
+  gtk = {
+    enable = true;
+    theme.package = pkgs.nordic;
+    theme.name = "Nordic";
+    iconTheme.package = pkgs.nordzy-icon-theme;
+    iconTheme.name = "Nordzy-dark";
+    cursorTheme.package = pkgs.nordzy-cursor-theme;
+    cursorTheme.name = "Nordzy-cursors";  # dark cursors
+    font.name = "Noto Sans";
+    font.size = 10;
   };
 }

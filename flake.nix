@@ -17,6 +17,11 @@
     };
 
     hyprland.url = "github:hyprwm/Hyprland/v0.23.0beta";
+
+    nixgl = {
+        url = "github:guibou/nixGL";
+        inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { home-manager, nixpkgs, hyprland, ... }@inputs:
@@ -36,7 +41,7 @@
 
         extraSpecialArgs = {
           inputs = {
-            inherit (inputs) goldvalley;
+            inherit (inputs) goldvalley nixgl;
             inherit lucide;
           };
           inherit system;
