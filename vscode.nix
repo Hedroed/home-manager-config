@@ -173,6 +173,7 @@ in
 
     "[nix]" = {
       "editor.defaultFormatter" = "B4dM4n.nixpkgs-fmt";
+      "editor.tabSize" = 2;
     };
     "[rust]" = {
       "editor.defaultFormatter" = "rust-lang.rust-analyzer";

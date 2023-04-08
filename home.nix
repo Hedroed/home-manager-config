@@ -34,6 +34,8 @@ let
     extra1 = "#ff79c6";
   };
 
+  blackPapirusIcons = pkgs.papirus-icon-theme.override { color = "black"; };
+
 in {
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
@@ -41,6 +43,8 @@ in {
   home.homeDirectory = homeDirectory;
 
   home.packages = with pkgs; [
+    i3
+
     kitty
     firefox
     xfce.thunar
@@ -99,8 +103,8 @@ in {
   # ".gitconfig-work".source = ./gitconfig-work;
     ".icons/Nordzy-cursors".source = "${pkgs.nordzy-cursor-theme}/share/icons/Nordzy-cursors";
     ".local/share/icons/Nordzy-cursors".source = "${pkgs.nordzy-cursor-theme}/share/icons/Nordzy-cursors";
-    ".icons/Nordzy-dark".source = "${pkgs.nordzy-icon-theme}/share/icons/Nordzy-dark";
-    ".local/share/icons/Nordzy-dark".source = "${pkgs.nordzy-icon-theme}/share/icons/Nordzy-dark";
+    ".icons/Papirus-Dark".source = "${blackPapirusIcons}/share/icons/Papirus-Dark";
+    ".local/share/icons/Papirus-Dark".source = "${blackPapirusIcons}/share/icons/Papirus-Dark";
     ".themes/Nordic".source = "${pkgs.nordic}/share/themes/Nordic";
     ".local/share/themes/Nordic".source = "${pkgs.nordic}/share/themes/Nordic";
   };
@@ -473,8 +477,8 @@ in {
     enable = true;
     theme.package = pkgs.nordic;
     theme.name = "Nordic";
-    iconTheme.package = pkgs.nordzy-icon-theme;
-    iconTheme.name = "Nordzy-dark";
+    iconTheme.package = blackPapirusIcons;
+    iconTheme.name = "Papirus-Dark";
     cursorTheme.package = pkgs.nordzy-cursor-theme;
     cursorTheme.name = "Nordzy-cursors";  # dark cursors
     font.name = "Noto Sans";

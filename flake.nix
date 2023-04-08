@@ -57,6 +57,12 @@
         # Optionally use extraSpecialArgs
         # to pass through arguments to home.nix
       };
+      devShells.${system}.default = pkgs.mkShell {
+        packages = [
+          # to test packages
+          pkgs.papirus-icon-theme.override { color = "black"; }
+        ];
+      };
     };
 }
 
