@@ -14,6 +14,16 @@ let
     ${homeDirectory}/.local/bin/i3lock -n -c 000000 -i /tmp/lockscreen.png
     '';
 
+  xinitrc = pkgs.writeShellScriptBin "xinitrc"
+    ''
+    usermodmap=$HOME/.Xmodmap
+    if [ -f "$userresources" ]; then
+        xrdb -merge "$userresources"
+    fi
+
+    exec dbus-launch ${pkgs.i3}
+    '';
+
   c = {
     dark1 = "#2E3440";
     dark2 = "#3B4252";
@@ -50,6 +60,9 @@ in {
     xfce.thunar
     xfce.thunar-volman
 
+    gimp
+    inkscape
+
     # utils
     coreutils
     inetutils
@@ -61,6 +74,7 @@ in {
     ripgrep
     vim
 
+    # locking
     goldvalley
     lockBin
 
@@ -107,6 +121,7 @@ in {
     ".local/share/icons/Papirus-Dark".source = "${blackPapirusIcons}/share/icons/Papirus-Dark";
     ".themes/Nordic".source = "${pkgs.nordic}/share/themes/Nordic";
     ".local/share/themes/Nordic".source = "${pkgs.nordic}/share/themes/Nordic";
+    ".xinitrc".source = "${xinitrc}/bin/xinitrc";
   };
 
   home.shellAliases = {
@@ -184,6 +199,27 @@ in {
           "autojump"
         ];
       };
+  };
+
+  programs.fzf = {
+    enable = true;
+    enableBashIntegration = false;
+    enableFishIntegration = false;
+    tmux.enableShellIntegration = false;
+    colors = {
+      "fg" = c.white1;
+      "bg" = c.dark1;
+      "hl" = c.green;
+      "fg+" = c.white1;
+      "bg+" = c.dark3;
+      "hl+" = c.green;
+      "pointer" = c.red;
+      "info" = c.dark4;
+      "spinner" = c.dark4;
+      "header" = c.dark4;
+      "prompt" = c.blue3;
+      "marker" = c.yellow;
+    };
   };
 
   programs.starship = {
@@ -452,22 +488,22 @@ in {
     };
     extraConfig = ''
       set $system_action (l)ock, (e)xit, (s)uspend, (r)eboot, (Shift+s)hutdown
-      set $base00 #2E3440
-      set $base01 #3B4252
-      set $base02 #434C5E
-      set $base03 #4C566A
-      set $base04 #D8DEE9
-      set $base05 #E5E9F0
-      set $base06 #ECEFF4
-      set $base07 #8FBCBB
-      set $base08 #88C0D0
-      set $base09 #81A1C1
-      set $base0A #5E81AC
-      set $base0B #BF616A
-      set $base0C #D08770
-      set $base0D #EBCB8B
-      set $base0E #A3BE8C
-      set $base0F #B48EAD
+      set $base00 ${c.dark1}
+      set $base01 ${c.dark2}
+      set $base02 ${c.dark3}
+      set $base03 ${c.dark4}
+      set $base04 ${c.white1}
+      set $base05 ${c.white2}
+      set $base06 ${c.white3}
+      set $base07 ${c.blue1}
+      set $base08 ${c.blue2}
+      set $base09 ${c.blue3}
+      set $base0A ${c.blue4}
+      set $base0B ${c.red}
+      set $base0C ${c.orange}
+      set $base0D ${c.yellow}
+      set $base0E ${c.green}
+      set $base0F ${c.purple}
     '';
   };
 
