@@ -21,7 +21,9 @@ let
         xrdb -merge "$userresources"
     fi
 
-    exec dbus-launch ${pkgs.i3}
+    export LC_ALL=en_US.UTF-8
+
+    exec dbus-launch ${pkgs.i3}/bin/i3
     '';
 
   c = {
@@ -63,6 +65,9 @@ in {
     gimp
     inkscape
 
+    nitrogen
+    clipit
+
     # utils
     coreutils
     inetutils
@@ -73,6 +78,7 @@ in {
     unzip
     ripgrep
     vim
+    autojump
 
     # locking
     goldvalley
@@ -114,7 +120,7 @@ in {
   home.file = {
     ".config/rofi/theme.rasi".source = ./rofi/theme.rasi;
     ".config/rofi/colors.rasi".source = ./rofi/colors.rasi;
-  # ".gitconfig-work".source = ./gitconfig-work;
+    # ".gitconfig-work".source = ./gitconfig-work;
     ".icons/Nordzy-cursors".source = "${pkgs.nordzy-cursor-theme}/share/icons/Nordzy-cursors";
     ".local/share/icons/Nordzy-cursors".source = "${pkgs.nordzy-cursor-theme}/share/icons/Nordzy-cursors";
     ".icons/Papirus-Dark".source = "${blackPapirusIcons}/share/icons/Papirus-Dark";
@@ -356,7 +362,7 @@ in {
         # command = "${pkgs.i3-gaps}/bin/i3bar -t";
         statusCommand = "${pkgs.i3status}/bin/i3status";
         fonts = {
-          names = [ "DejaVu Sans Mono" "Lucide" ];
+          names = [ "Noto Sans" "Lucide" ];
           style = "Regular";
           size = 10.0;
         };
@@ -447,10 +453,10 @@ in {
         "${modifier}+Shift+9" = "move container to workspace number 9; workspace number 9";
         "${modifier}+Shift+0" = "move container to workspace number 10; workspace number 10";
         # move the currently focused window to the scratchpad
-        "${modifier} + Shift + parenright" = "move scratchpad";
+        "${modifier}+Shift+parenright" = "move scratchpad";
         # Show the next scratchpad window or hide the focused scratchpad window.
         # If there are multiple scratchpad windows, this command cycles through them.
-        "${modifier} + parenright" = "scratchpad show";
+        "${modifier}+parenright" = "scratchpad show";
       };
       modes = {
         resize = {
@@ -477,12 +483,12 @@ in {
       };
       terminal = "${nixgl}/bin/nixGL ${pkgs.kitty}/bin/kitty";
       startup = [
-        { command = "picom -b"; notification = false; }
-        { command = "dunst"; notification = false; }
-        { command = "nitrogen --restore"; notification = false; }
-        { command = "nm-applet"; notification = false; }
-        { command = "xfce4-power-manager"; notification = false; }
-        { command = "clipit"; notification = false; }
+        { command = "${pkgs.picom}/bin/picom -b"; notification = false; }
+        { command = "${pkgs.dunst}/bin/dunst"; notification = false; }
+        { command = "${pkgs.nitrogen}/bin/nitrogen --restore"; notification = false; }
+        { command = "${pkgs.networkmanagerapplet}/bin/nm-applet"; notification = false; }
+        { command = "${pkgs.xfce.xfce4-power-manager}/bin/xfce4-power-manager"; notification = false; }
+        { command = "${pkgs.clipit}/bin/clipit"; notification = false; }
       ];
       workspaceAutoBackAndForth = true;
     };
