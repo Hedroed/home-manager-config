@@ -60,7 +60,7 @@ let
     esac
 
     exit 0
-    ''
+    '';
 
   c = {
     dark1 = "#2E3440";
@@ -104,6 +104,8 @@ in {
 
     nitrogen
     clipit
+
+    keepassxc
 
     # utils
     coreutils
@@ -375,6 +377,10 @@ in {
     enable = true;
     defaultCacheTtl = 1800;
     enableSshSupport = true;
+  };
+
+  services.syncthing = {
+    enable = true;
   };
 
   xsession.enable = true;
