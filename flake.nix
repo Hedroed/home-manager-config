@@ -24,38 +24,52 @@
     };
   };
 
-  outputs = { home-manager, nixpkgs, hyprland, ... }@inputs:
+  outputs = { home-manager, nixpkgs, ... }@inputs:
     let
       system = "x86_64-linux";
       username = "hedroed";
+
       pkgs = import nixpkgs {
         inherit system;
         config.allowUnfree = true;
       };
 
       lucide = import ./lucide_font { inherit pkgs; };
+      extraSpecialArgs = {
+        inputs = {
+          inherit (inputs) goldvalley nixgl hyprland;
+          inherit lucide;
+        };
+        inherit system;
+      };
 
     in {
       homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
 
-        extraSpecialArgs = {
-          inputs = {
-            inherit (inputs) goldvalley nixgl;
-            inherit lucide;
-          };
-          inherit system;
-        };
-
-        # Specify your home configuration modules here
         modules = [
-          hyprland.homeManagerModules.default
           ./home.nix
-          ./hyprland.nix
         ];
 
-        # Optionally use extraSpecialArgs
-        # to pass through arguments to home.nix
+        inherit extraSpecialArgs;
+      };
+      nixosConfigurations = {
+        hostname = nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [
+            ./configuration.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                users.${username} = import ./home.nix;
+
+                inherit extraSpecialArgs;
+              };
+            }
+          ];
+        };
       };
       devShells.${system}.default = pkgs.mkShell {
         packages = [
