@@ -56,7 +56,7 @@
       };
 
       nixosConfigurations.${username} = nixpkgs.lib.nixosSystem {
-        inherit system;
+        inherit system pkgs;
         modules = [
           ./configuration.nix
           home-manager.nixosModules.home-manager
