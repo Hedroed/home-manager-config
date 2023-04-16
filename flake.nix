@@ -53,24 +53,24 @@
 
         inherit extraSpecialArgs;
       };
-      nixosConfigurations = {
-        hostname = nixpkgs.lib.nixosSystem {
-          inherit system;
-          modules = [
-            ./configuration.nix
-            home-manager.nixosModules.home-manager
-            {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                users.${username} = import ./home.nix;
 
-                inherit extraSpecialArgs;
-              };
-            }
-          ];
-        };
+      nixosConfigurations.${username} = nixpkgs.lib.nixosSystem {
+        inherit system;
+        modules = [
+          ./configuration.nix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users.${username} = import ./home.nix;
+
+              inherit extraSpecialArgs;
+            };
+          }
+        ];
       };
+
       devShells.${system}.default = pkgs.mkShell {
         packages = [
           # to test packages

@@ -53,9 +53,9 @@
   console.keyMap = "fr";
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.user = {
+  users.users.hedroed = {
     isNormalUser = true;
-    description = "user";
+    description = "hedroed";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [];
   };
