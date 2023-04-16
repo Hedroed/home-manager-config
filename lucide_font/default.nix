@@ -1,4 +1,4 @@
-{ pkgs }:
+{ pkgs, ... }:
   pkgs.stdenvNoCC.mkDerivation {
     name = "lucide-font";
     dontConfigue = true;

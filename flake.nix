@@ -36,13 +36,13 @@
         config.allowUnfree = true;
       };
 
-      lucide = import ./lucide_font { inherit pkgs; };
+      lucide = pkgs.callPackage ./lucide_font { };
       extraSpecialArgs = {
         inputs = {
           inherit (inputs) goldvalley hyprland;
           inherit lucide;
-          isNixos = false;
         };
+        isNixos = false;
         inherit system;
       };
 
@@ -78,12 +78,9 @@
         ];
       };
 
-      devShells.${system}.default = pkgs.mkShell {
-        packages = [
-          # to test packages
-          pkgs.papirus-icon-theme.override { color = "black"; }
-        ];
-      };
+      # Devshell for bootstrapping
+      # Acessible through 'nix develop' or 'nix-shell' (legacy)
+      devShells.${system} = import ./shell.nix { inherit pkgs; };
     };
 }
 
