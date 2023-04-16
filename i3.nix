@@ -139,7 +139,7 @@
         border = 1;
         titlebar = false;
       };
-      terminal = (if isNixos then "${inputs.nixgl.packages.${system}.default}/bin/nixGL " else "") ++ "${pkgs.kitty}/bin/kitty";
+      terminal = (if isNixos then "${inputs.nixgl.packages.${system}.default}/bin/nixGL " else "") + "${pkgs.kitty}/bin/kitty";
       startup = [
         { command = "${pkgs.picom}/bin/picom -b"; notification = false; }
         { command = "${pkgs.dunst}/bin/dunst"; notification = false; }
