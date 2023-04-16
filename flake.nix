@@ -37,7 +37,7 @@
       lucide = import ./lucide_font { inherit pkgs; };
       extraSpecialArgs = {
         inputs = {
-          inherit (inputs) goldvalley nixgl hyprland;
+          inherit (inputs) goldvalley hyprland;
           inherit lucide;
           isNixos = false;
         };
@@ -66,7 +66,7 @@
               useUserPackages = true;
               users.${username} = import ./home.nix;
 
-              extraSpecialArgs = extraSpecialArgs // { isNixos = true; };
+              extraSpecialArgs = extraSpecialArgs // { isNixos = true; inputs = extraSpecialArgs.inputs // {nixgl = inputs.nixgl;}; };
             };
           }
         ];

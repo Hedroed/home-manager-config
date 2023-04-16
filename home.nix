@@ -5,7 +5,6 @@ let
   homeDirectory = "/home/${username}";
 
   goldvalley = inputs.goldvalley.packages.${system}.default;
-  nixgl = inputs.nixgl.packages.${system}.default;
 
   lockBin = pkgs.writeShellScriptBin "locker"
     ''
@@ -144,7 +143,7 @@ in {
     noto-fonts
     noto-fonts-emoji
   ] ++ (if isNixos then [
-    nixgl
+    inputs.nixgl.packages.${system}.default
   ] else []);
 
   home.sessionPath = [ "$HOME/.local/bin" ];

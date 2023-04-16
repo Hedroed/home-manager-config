@@ -1,7 +1,5 @@
 { c }: { pkgs, lib, inputs, system, isNixos, ... }:
-let
-  nixgl = inputs.nixgl.packages.${system}.default;
-in {
+{
   xsession.windowManager.i3 = {
     enable = true;
     package = pkgs.i3-gaps;
@@ -141,7 +139,7 @@ in {
         border = 1;
         titlebar = false;
       };
-      terminal = (if isNixos then "${nixgl}/bin/nixGL " else "") ++ "${pkgs.kitty}/bin/kitty";
+      terminal = (if isNixos then "${inputs.nixgl.packages.${system}.default}/bin/nixGL " else "") ++ "${pkgs.kitty}/bin/kitty";
       startup = [
         { command = "${pkgs.picom}/bin/picom -b"; notification = false; }
         { command = "${pkgs.dunst}/bin/dunst"; notification = false; }
