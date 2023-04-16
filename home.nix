@@ -78,7 +78,7 @@ let
     orange = "#D08770";
     yellow = "#EBCB8B";
     green = "#A3BE8C";
-    purple = "#B48EAD";isNixos
+    purple = "#B48EAD";
     extra1 = "#ff79c6";
   };
 
