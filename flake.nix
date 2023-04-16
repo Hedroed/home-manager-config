@@ -5,7 +5,7 @@
 
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -39,6 +39,7 @@
         inputs = {
           inherit (inputs) goldvalley nixgl hyprland;
           inherit lucide;
+          isNixos = false;
         };
         inherit system;
       };
@@ -65,7 +66,7 @@
               useUserPackages = true;
               users.${username} = import ./home.nix;
 
-              inherit extraSpecialArgs;
+              extraSpecialArgs = extraSpecialArgs // { isNixos = true; };
             };
           }
         ];

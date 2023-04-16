@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, system, lib, ... }:
+{ config, pkgs, inputs, system, lib, isNixos, ... }:
 let
 
   username = "hedroed";
@@ -78,7 +78,7 @@ let
     orange = "#D08770";
     yellow = "#EBCB8B";
     green = "#A3BE8C";
-    purple = "#B48EAD";
+    purple = "#B48EAD";isNixos
     extra1 = "#ff79c6";
   };
 
@@ -137,14 +137,15 @@ in {
 
     # nix
     nixpkgs-fmt
-    nixgl
 
     # fonts
     (nerdfonts.override { fonts = [ "FiraCode" ]; })
     inputs.lucide
     noto-fonts
     noto-fonts-emoji
-  ];
+  ] ++ (if isNixos then [
+    nixgl
+  ] else []);
 
   home.sessionPath = [ "$HOME/.local/bin" ];
 

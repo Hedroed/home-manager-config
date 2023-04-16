@@ -1,4 +1,4 @@
-{ c }: { pkgs, lib, inputs, system, ... }:
+{ c }: { pkgs, lib, inputs, system, isNixos, ... }:
 let
   nixgl = inputs.nixgl.packages.${system}.default;
 in {
@@ -141,7 +141,7 @@ in {
         border = 1;
         titlebar = false;
       };
-      terminal = "${nixgl}/bin/nixGL ${pkgs.kitty}/bin/kitty";
+      terminal = (if isNixos then "${nixgl}/bin/nixGL " else "") ++ "${pkgs.kitty}/bin/kitty";
       startup = [
         { command = "${pkgs.picom}/bin/picom -b"; notification = false; }
         { command = "${pkgs.dunst}/bin/dunst"; notification = false; }
