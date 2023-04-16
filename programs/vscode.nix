@@ -1,4 +1,4 @@
-{ pkgs }:
+{ pkgs, ... }:
 {
   programs.vscode = let
     font = "'FiraCode Nerd Font Mono', monospace";

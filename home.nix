@@ -89,14 +89,10 @@ in {
   imports = [
     inputs.hyprland.homeManagerModules.default
     ./hyprland.nix
-    ./i3.nix { inherit c; }
+    (import ./i3.nix { inherit c; })
     ./programs/vscode.nix
     ./programs/firefox.nix
   ];
-
-  extraArgs = {
-    inherit system inputs;
-  };
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.

@@ -1,8 +1,6 @@
-{ c }:
-{ pkgs, lib, system, inputs, ... }:
+{ c }: { pkgs, lib, inputs, system, ... }:
 let
   nixgl = inputs.nixgl.packages.${system}.default;
-
 in {
   xsession.windowManager.i3 = {
     enable = true;
