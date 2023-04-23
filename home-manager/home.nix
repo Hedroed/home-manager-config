@@ -35,18 +35,12 @@ in {
     inputs.hyprland.homeManagerModules.default
     ./hyprland.nix
     (import ./i3.nix { inherit c; })
-    ./programs/vscode.nix
-    ./programs/firefox.nix
+    ./vscode.nix
+    ./firefox.nix
   ];
 
   nixpkgs = {
-    # You can add overlays here
-    overlays = [
-      # Add overlays your own flake exports (from overlays and pkgs dir):
-      outputs.overlays.additions
-      outputs.overlays.modifications
-      outputs.overlays.unstable-packages
-    ];
+    overlays = builtins.attrValues outputs.overlays;
     # Configure your nixpkgs instance
     config = {
       # Disable if you don't want unfree packages

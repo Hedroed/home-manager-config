@@ -1,11 +1,9 @@
 { config, pkgs, inputs, system, lib, ... }:
 let
 
-  goldvalley = inputs.goldvalley.packages.${system}.default;
-
   lockBin = pkgs.writeShellScriptBin "locker"
     ''
-    ${goldvalley}/bin/goldvalley -o /tmp/lockscreen.png
+    ${pkgs.inputs.goldvalley}/bin/goldvalley -o /tmp/lockscreen.png
 
     ${homeDirectory}/.local/bin/i3lock -n -c 000000 -i /tmp/lockscreen.png
     '';
@@ -117,7 +115,7 @@ in {
     autojump
 
     # locking
-    goldvalley
+    inputs.goldvalley
     lockBin
 
     # programming
@@ -128,7 +126,7 @@ in {
 
     # fonts
     (nerdfonts.override { fonts = [ "FiraCode" ]; })
-    inputs.lucide
+    lucide-fonts
     noto-fonts
     noto-fonts-emoji
   ];
