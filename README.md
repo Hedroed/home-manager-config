@@ -56,6 +56,22 @@ It will make the link between your home .xsession file and the display manager.
 
 source: http://skybert.net/linux/add-generic-x-session-to-sddm-menu/
 
+
+#### With hyprland
+
+https://wiki.hyprland.org/Getting-Started/Quick-start/#wrapping-the-launcher-recommended
+
+```
+#!/bin/sh
+
+cd ~
+
+export _JAVA_AWT_WM_NONREPARENTING=1
+export XCURSOR_SIZE=24
+
+exec Hyprland
+```
+
 ## documentation
 
 - https://nix-community.github.io/home-manager/

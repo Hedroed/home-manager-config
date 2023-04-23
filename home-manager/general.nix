@@ -9,18 +9,6 @@ let
     ${homeDirectory}/.local/bin/i3lock -n -c 000000 -i /tmp/lockscreen.png
     '';
 
-  xinitrc = pkgs.writeShellScriptBin "xinitrc"
-    ''
-    usermodmap=$HOME/.Xmodmap
-    if [ -f "$userresources" ]; then
-        xrdb -merge "$userresources"
-    fi
-
-    export LC_ALL=en_US.UTF-8
-
-    exec dbus-launch ${pkgs.i3}/bin/i3
-    '';
-
   i3exit = pkgs.writeShellScriptBin "i3exit"
     ''
     # with openrc use loginctl
@@ -145,7 +133,6 @@ in {
     ".local/share/icons/Papirus-Dark".source = "${blackPapirusIcons}/share/icons/Papirus-Dark";
     ".themes/Nordic".source = "${pkgs.nordic}/share/themes/Nordic";
     ".local/share/themes/Nordic".source = "${pkgs.nordic}/share/themes/Nordic";
-    ".xinitrc".source = "${xinitrc}/bin/xinitrc";
   };
 
   home.shellAliases = {
