@@ -1,9 +1,10 @@
-{ config, pkgs, inputs, system, lib, ... }:
+{ config, pkgs, inputs, ... }:
 let
+  homeDirectory = "/home/hedroed";
 
   lockBin = pkgs.writeShellScriptBin "locker"
     ''
-    ${pkgs.inputs.goldvalley}/bin/goldvalley -o /tmp/lockscreen.png
+    ${pkgs.inputs.goldvalley.default}/bin/goldvalley -o /tmp/lockscreen.png
 
     ${homeDirectory}/.local/bin/i3lock -n -c 000000 -i /tmp/lockscreen.png
     '';
@@ -79,11 +80,6 @@ let
   blackPapirusIcons = pkgs.papirus-icon-theme.override { color = "black"; };
 
 in {
-
-  # Home Manager needs a bit of information about you and the
-  # paths it should manage.
-  home.username = username;
-  home.homeDirectory = homeDirectory;
 
   home.packages = with pkgs; [
     i3
@@ -174,7 +170,7 @@ in {
       window_padding_width = 10;
       mouse_map = "left click ungrabbed no-op";
     };
-    theme = "Nord";
+    #theme = "Nord";
   };
 
   programs.rofi = {
@@ -380,18 +376,18 @@ in {
     font.size = 10;
   };
 
-  systemd.user.services.polkit-authentication-agent = {
-    Unit = {
-      Description = "Polkit authentication agent";
-      Documentation = "https://gitlab.freedesktop.org/polkit/polkit/";
-      After = [ "graphical-session-pre.target" ];
-      PartOf = [ "graphical-session.target" ];
-    };
-    Service = {
-      ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-      Restart = "always";
-      BusName = "org.freedesktop.PolicyKit1.Authority";
-    };
-    Install.WantedBy = [ "graphical-session.target" ];
-  };
+  # systemd.user.services.polkit-authentication-agent = {
+  #   Unit = {
+  #     Description = "Polkit authentication agent";
+  #     Documentation = "https://gitlab.freedesktop.org/polkit/polkit/";
+  #     After = [ "graphical-session-pre.target" ];
+  #     PartOf = [ "graphical-session.target" ];
+  #   };
+  #   Service = {
+  #     ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+  #     Restart = "always";
+  #     BusName = "org.freedesktop.PolicyKit1.Authority";
+  #   };
+  #   Install.WantedBy = [ "graphical-session.target" ];
+  # };
 }

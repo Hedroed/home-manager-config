@@ -2,7 +2,7 @@
 {
   xsession.windowManager.i3 = {
     enable = true;
-    package = pkgs.i3-gaps;
+    package = pkgs.i3;
     config = rec {
       modifier = "Mod4";
       bars = [{
@@ -17,7 +17,7 @@
           urgentWorkspace   = { border = "${c.blue2}"; background = "${c.blue2}"; text = "${c.dark1}"; };
           bindingMode       = { border = "${c.dark1}"; background = "${c.blue4}"; text = "${c.dark1}"; };
         };
-        # command = "${pkgs.i3-gaps}/bin/i3bar -t";
+        # command = "${pkgs.i3}/bin/i3bar -t";
         statusCommand = "${pkgs.i3status}/bin/i3status";
         fonts = {
           names = [ "Noto Sans" "Lucide" ];
@@ -73,12 +73,12 @@
         style = "Regular";
         size = 8.0;
       };
-      gaps = {
-        inner = 5;
-        outer = -2;
-        smartBorders = "on";
-        smartGaps = true;
-      };
+      #gaps = {
+      #  inner = 5;
+      #  outer = -2;
+      #  smartBorders = "on";
+      #  smartGaps = true;
+      #};
       menu = "${pkgs.rofi}/bin/rofi -show drun";
       keybindings = lib.mkOptionDefault {
         "${modifier}+Shift+q" = "kill";

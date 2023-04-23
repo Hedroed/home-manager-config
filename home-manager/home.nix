@@ -33,6 +33,7 @@ in {
 
   imports = [
     inputs.hyprland.homeManagerModules.default
+    ./general.nix
     ./hyprland.nix
     (import ./i3.nix { inherit c; })
     ./vscode.nix
@@ -50,7 +51,6 @@ in {
     };
   };
 
-  # TODO: Set your username
   home = {
     inherit username homeDirectory;
   };
@@ -64,7 +64,7 @@ in {
   programs.git.enable = true;
 
   # Nicely reload system units when changing configs
-  systemd.user.startServices = "sd-switch";
+  #systemd.user.startServices = "sd-switch";
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   home.stateVersion = "22.11";
