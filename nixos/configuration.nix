@@ -11,7 +11,7 @@
     ./hardware-configuration.nix
   ];
 
-  services.greetd.settings.default_session.user = "misterio";
+  services.greetd.settings.default_session.user = "hedroed";
 
   networking.hostName = "nixos";
 
@@ -24,7 +24,7 @@
       openssh.authorizedKeys.keys = [
         # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
       ];
-      extraGroups = [ "wheel" "docker" "wireshark" ];
+      extraGroups = [ "wheel" "docker" ];
     };
   };
 
