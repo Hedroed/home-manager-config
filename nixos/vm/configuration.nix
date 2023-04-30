@@ -93,6 +93,9 @@
     passwordAuthentication = true;
   };
 
+  # used by GTK in home-manager
+  programs.dconf.enable = true;
+
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
