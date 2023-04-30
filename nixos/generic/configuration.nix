@@ -5,8 +5,8 @@
     inputs.hardware.nixosModules.common-cpu-intel
     # inputs.hardware.nixosModules.common-ssd
 
-    ./common
-    ./greetd.nix
+    ../common
+    ../optionals/greetd.nix
 
     ./hardware-configuration.nix
   ];
@@ -25,6 +25,7 @@
         # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
       ];
       extraGroups = [ "wheel" "docker" ];
+      shell = pkgs.zsh;
     };
   };
 
