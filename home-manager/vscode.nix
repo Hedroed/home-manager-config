@@ -5,7 +5,7 @@
     colorTheme = "Nord";
     iconTheme = "material-icon-theme";
 
-    inherit (pkgs.vscode-utils) buildVscodeMarketplaceExtension;
+    inherit (pkgs.unstable.vscode-utils) buildVscodeMarketplaceExtension;
 
     # Helper function for home-spun VS Code extension derivations
     extension = { publisher, name, version, sha256 }:
@@ -38,13 +38,14 @@
   in
   {
     enable = true;
+    package = pkgs.unstable.vscode;
     enableExtensionUpdateCheck = true;
     enableUpdateCheck = true;
     extensions = (with myExtensions; [
       textPastry
       spellCheckerFrench
       atomKeymap
-    ]) ++ (with pkgs.vscode-extensions; [
+    ]) ++ (with pkgs.unstable.vscode-extensions; [
       rust-lang.rust-analyzer
       ms-python.vscode-pylance
       bbenoist.nix
@@ -84,6 +85,8 @@
       };
       "editor.inlayHints.enabled" = "onUnlessPressed";
       "editor.rulers" = [ 80 100 ];
+
+      "extensions.ignoreRecommendations" = true;
 
       "telemetry.telemetryLevel" = "all";
       "cSpell.language" = "en,en-US,fr,fr-FR";

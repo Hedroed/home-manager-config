@@ -1,44 +1,21 @@
-# This is your home-manager configuration file
-# Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
+{ inputs, lib, pkgs, config, outputs, ... }:
 
-{ inputs, outputs, lib, config, pkgs, ... }: 
-let
-
-  username = "hedroed";
-  homeDirectory = "/home/${username}";
-
-  c = {
-    dark1 = "#2E3440";
-    dark2 = "#3B4252";
-    dark3 = "#434C5E";
-    dark4 = "#4C566A";
-    white1 = "#D8DEE9";
-    white2 = "#E5E9F0";
-    white3 = "#ECEFF4";
-    blue1 = "#8FBCBB";
-    blue2 = "#88C0D0";
-    blue3 = "#81A1C1";
-    blue4 = "#5E81AC";
-    red = "#BF616A";
-    orange = "#D08770";
-    yellow = "#EBCB8B";
-    green = "#A3BE8C";
-    purple = "#B48EAD";
-    extra1 = "#ff79c6";
-  };
-
-  blackPapirusIcons = pkgs.papirus-icon-theme.override { color = "black"; };
-
-in {
+{
 
   imports = [
-    inputs.hyprland.homeManagerModules.default
+    inputs.nix-colors.homeManagerModule
     ./general.nix
+    ./gtk.nix
     ./hyprland.nix
-    (import ./i3.nix { inherit c; })
+    ./i3.nix
+    ./rofi
+    ./locker.nix
     ./vscode.nix
+    ./fzf.nix
     ./firefox.nix
-  ];
+  ] ++ (builtins.attrValues outputs.homeManagerModules);
+
+  colorscheme = inputs.nix-colors.colorSchemes.nord;
 
   nixpkgs = {
     overlays = builtins.attrValues outputs.overlays;
@@ -52,12 +29,11 @@ in {
   };
 
   home = {
-    inherit username homeDirectory;
+    username = lib.mkDefault "hedroed";
+    homeDirectory = lib.mkDefault "/home/${config.home.username}";
+    sessionPath = [ "$HOME/.local/bin" ];
   };
 
-  # Add stuff for your user as you see fit:
-  # programs.neovim.enable = true;
-  # home.packages = with pkgs; [ steam ];
 
   # Enable home-manager and git
   programs.home-manager.enable = true;

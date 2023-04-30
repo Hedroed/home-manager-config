@@ -1,23 +1,65 @@
-{ c }: { pkgs, lib, inputs, system, ... }:
-{
+{ config, pkgs, lib, inputs, ... }:
+let
+  palette = builtins.mapAttrs (name: value: "#${value}") config.colorscheme.colors; # Add leading '#'
+  extra1 = "#ff79c6";
+
+  i3exit = pkgs.writeShellScriptBin "i3exit"
+    ''
+    # with openrc use loginctl
+    [[ $(cat /proc/1/comm) == "systemd" ]] && logind=systemctl || logind=loginctl
+
+    case "$1" in
+        lock)
+            xset s activate
+            ;;
+        logout)
+            i3-msg exit
+            ;;
+        switch_user)
+            dm-tool switch-to-greeter
+            ;;
+        suspend)
+            $logind suspend
+            ;;
+        hibernate)
+            $logind hibernate
+            ;;
+        reboot)
+            $logind reboot
+            ;;
+        shutdown)
+            $logind poweroff
+            ;;
+        *)
+            echo "== ! i3exit: missing or invalid argument ! =="
+            echo "Try again with: lock | logout | switch_user | suspend | hibernate | reboot | shutdown"
+            exit 2
+    esac
+
+    exit 0
+    '';
+in {
+  home.packages = [
+    i3exit
+  ];
+
   xsession.windowManager.i3 = {
     enable = true;
-    package = pkgs.i3;
+    package = pkgs.i3-gaps;
     config = rec {
       modifier = "Mod4";
       bars = [{
         colors = {
-          background = "${c.dark1}";
-          separator  = "${c.dark1}";
-          statusline = "${c.dark3}";
+          background = "${palette.base00}";
+          separator  = "${palette.base00}";
+          statusline = "${palette.base02}";
 
-          focusedWorkspace  = { border = "${c.white2}"; background = "${c.yellow}"; text = "${c.dark1}"; };
-          activeWorkspace   = { border = "${c.white2}"; background = "${c.dark4}"; text = "${c.dark1}"; };
-          inactiveWorkspace = { border = "${c.dark4}"; background = "${c.dark2}"; text = "${c.white2}"; };
-          urgentWorkspace   = { border = "${c.blue2}"; background = "${c.blue2}"; text = "${c.dark1}"; };
-          bindingMode       = { border = "${c.dark1}"; background = "${c.blue4}"; text = "${c.dark1}"; };
+          focusedWorkspace = { border = "${palette.base0F}"; background = "${palette.base0D}"; text = "${palette.base03}"; };
+          activeWorkspace = { border = "${palette.base06}"; background = "${palette.base04}"; text = "${palette.base03}"; };
+          inactiveWorkspace = { border = "${palette.base03}"; background = "${palette.base01}"; text = "${palette.base05}"; };
+          urgentWorkspace = { border = "${palette.base08}"; background = "${palette.base08}"; text = "${palette.base00}"; };
+          bindingMode = { border = "${palette.base00}"; background = "${palette.base0A}"; text = "${palette.base00}"; };
         };
-        # command = "${pkgs.i3}/bin/i3bar -t";
         statusCommand = "${pkgs.i3status}/bin/i3status";
         fonts = {
           names = [ "Noto Sans" "Lucide" ];
@@ -27,13 +69,12 @@
         trayOutput = "primary";
       }];
       colors = {
-        focused         = { background = "${c.dark3}"; border = "${c.dark3}"; text = "${c.white3}"; indicator = "${c.orange}"; childBorder = "${c.dark3}"; };
-        focusedInactive = { background = "${c.dark2}"; border = "${c.dark2}"; text = "${c.white1}"; indicator = "${c.dark4}"; childBorder = "${c.dark2}"; };
-        unfocused       = { background = "${c.dark2}"; border = "${c.dark1}"; text = "${c.white1}"; indicator = "${c.dark2}"; childBorder = "${c.dark2}"; };
-        urgent          = { background = "${c.blue2}"; border = "${c.blue2}"; text = "${c.dark1}"; indicator = "${c.blue2}"; childBorder = "${c.blue2}"; };
-        placeholder     = { background = "${c.dark1}"; border = "${c.dark1}"; text = "${c.white3}"; indicator = "${c.dark1}"; childBorder = "${c.dark1}"; };
-
-        background       = "${c.blue1}";
+        focused    = { background = "${palette.base02}"; border = "${palette.base02}"; text = "${palette.base06}"; indicator = "${palette.base0C}"; childBorder = "${palette.base02}"; };
+        focusedInactive = { background = "${palette.base01}"; border = "${palette.base01}"; text = "${palette.base04}"; indicator = "${palette.base03}"; childBorder = "${palette.base01}"; };
+        unfocused  = { background = "${palette.base01}"; border = "${palette.base00}"; text = "${palette.base04}"; indicator = "${palette.base01}"; childBorder = "${palette.base01}"; };
+        urgent     = { background = "${palette.base08}"; border = "${palette.base08}"; text = "${palette.base00}"; indicator = "${palette.base08}"; childBorder = "${palette.base08}"; };
+        placeholder= { background = "${palette.base00}"; border = "${palette.base00}"; text = "${palette.base06}"; indicator = "${palette.base00}"; childBorder = "${palette.base00}"; };
+        background = "${palette.base07}";
       };
       floating = {
         border = 2;
@@ -73,13 +114,13 @@
         style = "Regular";
         size = 8.0;
       };
-      #gaps = {
-      #  inner = 5;
-      #  outer = -2;
-      #  smartBorders = "on";
-      #  smartGaps = true;
-      #};
-      menu = "${pkgs.rofi}/bin/rofi -show drun";
+      gaps = {
+       inner = 5;
+       outer = -2;
+       smartBorders = "on";
+       smartGaps = true;
+      };
+      menu = "rofi -show drun";
       keybindings = lib.mkOptionDefault {
         "${modifier}+Shift+q" = "kill";
         "${modifier}+l" = "exec xset s activate";
@@ -139,35 +180,115 @@
         border = 1;
         titlebar = false;
       };
-      terminal = pkgs.lib.mkDefault "${pkgs.kitty}/bin/kitty";
+      terminal = pkgs.lib.mkDefault "kitty";
       startup = [
-        { command = "${pkgs.picom}/bin/picom -b"; notification = false; }
-        { command = "${pkgs.dunst}/bin/dunst"; notification = false; }
-        { command = "${pkgs.nitrogen}/bin/nitrogen --restore"; notification = false; }
-        { command = "${pkgs.networkmanagerapplet}/bin/nm-applet"; notification = false; }
-        { command = "${pkgs.xfce.xfce4-power-manager}/bin/xfce4-power-manager"; notification = false; }
-        { command = "${pkgs.clipit}/bin/clipit"; notification = false; }
+        { command = "picom -b"; notification = false; }
+        { command = "dunst"; notification = false; }
+        { command = "nitrogen --restore"; notification = false; }
+        { command = "nm-applet"; notification = false; }
+        { command = "xfce4-power-manager"; notification = false; }
+        { command = "clipit"; notification = false; }
       ];
       workspaceAutoBackAndForth = true;
     };
     extraConfig = ''
       set $system_action (l)ock, (e)xit, (s)uspend, (r)eboot, (Shift+s)hutdown
-      set $base00 ${c.dark1}
-      set $base01 ${c.dark2}
-      set $base02 ${c.dark3}
-      set $base03 ${c.dark4}
-      set $base04 ${c.white1}
-      set $base05 ${c.white2}
-      set $base06 ${c.white3}
-      set $base07 ${c.blue1}
-      set $base08 ${c.blue2}
-      set $base09 ${c.blue3}
-      set $base0A ${c.blue4}
-      set $base0B ${c.red}
-      set $base0C ${c.orange}
-      set $base0D ${c.yellow}
-      set $base0E ${c.green}
-      set $base0F ${c.purple}
+      set $base00 ${palette.base00}
+      set $base01 ${palette.base01}
+      set $base02 ${palette.base02}
+      set $base03 ${palette.base03}
+      set $base04 ${palette.base04}
+      set $base05 ${palette.base05}
+      set $base06 ${palette.base06}
+      set $base07 ${palette.base07}
+      set $base08 ${palette.base08}
+      set $base09 ${palette.base09}
+      set $base0A ${palette.base0A}
+      set $base0B ${palette.base0B}
+      set $base0C ${palette.base0C}
+      set $base0D ${palette.base0D}
+      set $base0E ${palette.base0E}
+      set $base0F ${palette.base0F}
     '';
+  };
+
+  programs.i3status = {
+    enable = true;
+    enableDefault = false;
+    general = {
+      output_format = "i3bar";
+      markup = "pango";
+      interval = 1;
+      colors = false;
+      color_good = "${palette.base0B}";
+      color_bad = "${palette.base08}";
+      color_degraded = "${palette.base0A}";
+    };
+    modules = {
+      "cpu_temperature 0" = {
+        position = 1;
+        settings = {
+          format = "<span background='${palette.base0B}'>  </span><span background='${palette.base05}'> %degrees °C </span>";
+          path = "/sys/class/thermal/thermal_zone0/temp";
+        };
+      };
+      "load" = {
+        position = 2;
+        settings = {
+          format = "<span background='${palette.base0C}'>  </span><span background='${palette.base05}'> %5min Load </span>";
+        };
+      };
+      "disk /" = {
+        position = 3;
+        settings = {
+          format = "<span background='${palette.base0D}'>  </span><span background='${palette.base05}'> %free Free </span>";
+        };
+      };
+      "ethernet _first_" = {
+        position = 4;
+        settings = {
+          format_up = "<span background='${palette.base0F}'>  </span><span background='${palette.base05}'> %ip </span>";
+          format_down = "<span background='${palette.base0F}'>  </span><span background='${palette.base05}'> Disconnected </span>";
+        };
+      };
+      "wireless _first_" = {
+        position = 5;
+        settings = {
+          format_up = "<span background='${palette.base0F}'>  </span><span background='${palette.base05}'> %ip </span>";
+          format_down = "<span background='${palette.base0F}'>  </span><span background='${palette.base05}'> Disconnected </span>";
+        };
+      };
+      "battery all" = {
+        position = 6;
+        settings = {
+          format = "<span background='${palette.base0E}'> %status </span><span background='${palette.base05}'> %percentage Bat </span>";
+          format_down = "<span background='${palette.base0E}'></span><span background='${palette.base05}'> No battery </span>";
+          last_full_capacity = true;
+          integer_battery_capacity = true;
+          status_chr = "";
+          status_bat = ""; # discharging
+          status_unk = "";
+          status_full = "";
+          low_threshold = 15;
+          threshold_type = "time";
+        };
+      };
+      "volume master" = {
+        position = 7;
+        settings = {
+          format = "<span background='${extra1}'>  </span><span background='${palette.base05}'> %volume </span>";
+          format_muted = "<span background='${extra1}'>  </span><span background='${palette.base05}'> Muted </span>";
+          device = "default";
+          mixer = "Master";
+          mixer_idx = 0;
+        };
+      };
+      "time" = {
+        position = 8;
+        settings = {
+          format = "<span background='${palette.base08}'>  </span><span background='${palette.base05}'> %Y-%m-%d %H:%M:%S %s </span>";
+        };
+      };
+    };
   };
 }
