@@ -34,6 +34,9 @@
     # nix
     nixpkgs-fmt
 
+    # env
+    dconf
+
     # fonts
     (nerdfonts.override { fonts = [ "FiraCode" ]; })
     lucide-fonts
