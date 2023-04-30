@@ -71,7 +71,7 @@
       window_padding_width = 10;
       mouse_map = "left click ungrabbed no-op";
     };
-    #theme = "Nord";
+    theme = "Nord";
   };
 
   programs.git = {
