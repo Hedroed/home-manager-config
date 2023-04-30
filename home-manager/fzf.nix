@@ -8,18 +8,18 @@ in{
     enableFishIntegration = false;
     tmux.enableShellIntegration = false;
     colors = {
-      "fg" = palette.base04;
+      "fg" = palette.base05;
       "bg" = palette.base00;
-      "hl" = palette.base0E;
-      "fg+" = palette.base04;
+      "hl" = palette.base08;
+      "fg+" = palette.base05;
       "bg+" = palette.base02;
-      "hl+" = palette.base0E;
-      "pointer" = palette.base0B;
+      "hl+" = palette.base08;
+      "pointer" = palette.base08;
       "info" = palette.base03;
       "spinner" = palette.base03;
-      "header" = palette.base03;
-      "prompt" = palette.base09;
-      "marker" = palette.base0D;
+      "header" = palette.base0B;
+      "prompt" = palette.base0D;
+      "marker" = palette.base0B;
     };
   };
 }
