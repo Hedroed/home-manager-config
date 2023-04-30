@@ -3,6 +3,7 @@ let
   inherit (inputs.nix-colors.lib-contrib { inherit pkgs; }) gtkThemeFromScheme;
 
   blackPapirusIcons = pkgs.papirus-icon-theme.override { color = "black"; };
+  generatedTheme = gtkThemeFromScheme { scheme = config.colorscheme; };
 
 in
 rec {
@@ -11,8 +12,8 @@ rec {
     ".local/share/icons/Nordzy-cursors".source = "${pkgs.nordzy-cursor-theme}/share/icons/Nordzy-cursors";
     ".icons/Papirus-Dark".source = "${blackPapirusIcons}/share/icons/Papirus-Dark";
     ".local/share/icons/Papirus-Dark".source = "${blackPapirusIcons}/share/icons/Papirus-Dark";
-    ".themes/Nordic".source = "${pkgs.nordic}/share/themes/Nordic";
-    ".local/share/themes/Nordic".source = "${pkgs.nordic}/share/themes/Nordic";
+    ".themes/nord".source = "${generatedTheme}/share/themes/nord";
+    ".local/share/themes/nord".source = "${generatedTheme}/share/themes/nord";
   };
 
   gtk = {
@@ -23,11 +24,11 @@ rec {
     };
     theme = {
       name = "${config.colorscheme.slug}";
-      package = gtkThemeFromScheme { scheme = config.colorscheme; };
+      package = generatedTheme;
     };
     iconTheme = {
-      name = "Papirus";
-      package = pkgs.papirus-icon-theme;
+      name = "Papirus-Dark";
+      package = blackPapirusIcons;
     };
     cursorTheme = {
       package = pkgs.nordzy-cursor-theme;
