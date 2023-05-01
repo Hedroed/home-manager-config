@@ -31,7 +31,7 @@ in
   #   neededForUsers = true;
   # };
 
-  home-manager.users.hedroed = import ../../../../home-manager/home.nix;
+  # home-manager.users.hedroed = import ../../../home-manager/home.nix;
 
   # security.pam.services = { swaylock = { }; };
 }
