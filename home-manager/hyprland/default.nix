@@ -11,12 +11,12 @@
   };
 
   home.packages = with pkgs; [
-    inputs.hyprwm-contrib.packages.${system}.grimblast
+    # inputs.hyprwm-contrib.grimblast
     swaybg
     swayidle
     wofi
     # TODO
-    # inputs.hyprland.packages.${system}.xdg-desktop-portal-hyprland
+    # inputs.hyprland.xdg-desktop-portal-hyprland
   ];
 
   programs = {
@@ -39,7 +39,7 @@
 
   wayland.windowManager.hyprland = {
     enable = true;
-    package = inputs.hyprland.packages.${pkgs.system}.default;
+    package = pkgs.inputs.hyprland.default;
     extraConfig = import ./config.nix { inherit pkgs; };
   };
 }
