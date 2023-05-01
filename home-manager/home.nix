@@ -6,9 +6,11 @@
     inputs.nix-colors.homeManagerModule
     ./general.nix
     ./gtk.nix
-    ./hyprland.nix
+    ./qt.nix
+    ./hyprland
     ./i3.nix
     ./rofi
+    ./kitty.nix
     ./locker.nix
     ./vscode.nix
     ./fzf.nix

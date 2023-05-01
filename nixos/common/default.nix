@@ -4,19 +4,13 @@
     inputs.home-manager.nixosModules.home-manager
     # ./acme.nix
     # ./auto-upgrade.nix
-    ./docker.nix
-    # ./fish.nix
     # ./locale.nix
-    # ./mysql.nix
     ./nix.nix
     # ./openssh.nix
     # ./optin-persistence.nix
-    # ./postgres.nix
     # ./sops.nix
     # ./ssh-serve-store.nix
-    # ./steam-hardware.nix
     ./systemd-initrd.nix
-    # ./tailscale.nix
   ] ++ (builtins.attrValues outputs.nixosModules);
 
   home-manager = {

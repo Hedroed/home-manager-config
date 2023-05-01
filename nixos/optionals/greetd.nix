@@ -19,10 +19,6 @@ in
         command = sway-kiosk "${gtkgreet} -l -c '$SHELL -l'";
         inherit user;
       };
-      initial_session = {
-        command = "$SHELL -l";
-        inherit user;
-      };
     };
   };
 }

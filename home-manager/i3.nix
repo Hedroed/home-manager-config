@@ -180,7 +180,7 @@ in {
         border = 1;
         titlebar = false;
       };
-      terminal = pkgs.lib.mkDefault "kitty";
+      terminal = pkgs.lib.mkDefault "xterm";
       startup = [
         { command = "picom -b"; notification = false; }
         { command = "dunst"; notification = false; }

@@ -1,4 +1,4 @@
-{ pkgs, username, ... }:
+{ pkgs, ... }:
 ''
   input {
     kb_layout = fr
@@ -62,7 +62,7 @@
 
   $mod = SUPER
 
-  bind = $mod, Return, exec, ${pkgs.kitty}/bin/kitty
+  bind = $mod, Return, exec, xterm
   bind = $mod SHIFT, Q, killactive, 
   bind = $mod, space, togglefloating, 
   bind = $mod, f, fullscreen, 

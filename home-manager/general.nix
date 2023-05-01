@@ -1,7 +1,6 @@
 { config, pkgs, inputs, ... }:
 {
   home.packages = with pkgs; [
-    kitty
     firefox
     xfce.thunar
     xfce.thunar-volman
@@ -54,24 +53,6 @@
 
   home.shellAliases = {
     open = "xdg-open";
-  };
-
-  programs.kitty = {
-    enable = true;
-    font = {
-      name = "FiraCode Nerd Font Mono";
-      size = 10;
-    };
-    settings = {
-      scrollback_lines = 10000;
-      enable_audio_bell = false;
-      update_check_interval = 0;
-      disable_ligatures = "never";
-      background_opacity = "0.95";
-      window_padding_width = 10;
-      mouse_map = "left click ungrabbed no-op";
-    };
-    theme = "Nord";
   };
 
   programs.git = {
