@@ -1,7 +1,6 @@
 { config, pkgs, lib, inputs, ... }:
 let
   palette = builtins.mapAttrs (name: value: "#${value}") config.colorscheme.colors; # Add leading '#'
-  extra1 = "#ff79c6";
 
   i3exit = pkgs.writeShellScriptBin "i3exit"
     ''
@@ -228,47 +227,47 @@ in {
       "cpu_temperature 0" = {
         position = 1;
         settings = {
-          format = "<span background='${palette.base0B}'>  </span><span background='${palette.base05}'> %degrees °C </span>";
+          format = "<span background='${palette.base09}'>   </span><span background='${palette.base05}'> %degrees °C </span>";
           path = "/sys/class/thermal/thermal_zone0/temp";
         };
       };
       "load" = {
         position = 2;
         settings = {
-          format = "<span background='${palette.base0C}'>  </span><span background='${palette.base05}'> %5min Load </span>";
+          format = "<span background='${palette.base0A}'>   </span><span background='${palette.base05}'> %5min Load </span>";
         };
       };
       "disk /" = {
         position = 3;
         settings = {
-          format = "<span background='${palette.base0D}'>  </span><span background='${palette.base05}'> %free Free </span>";
+          format = "<span background='${palette.base0B}'>   </span><span background='${palette.base05}'> %free Free </span>";
         };
       };
       "ethernet _first_" = {
         position = 4;
         settings = {
-          format_up = "<span background='${palette.base0F}'>  </span><span background='${palette.base05}'> %ip </span>";
-          format_down = "<span background='${palette.base0F}'>  </span><span background='${palette.base05}'> Disconnected </span>";
+          format_up = "<span background='${palette.base0C}'>   </span><span background='${palette.base05}'> %ip </span>";
+          format_down = "<span background='${palette.base0C}'>   </span><span background='${palette.base05}'> Disconnected </span>";
         };
       };
       "wireless _first_" = {
         position = 5;
         settings = {
-          format_up = "<span background='${palette.base0F}'>  </span><span background='${palette.base05}'> %ip </span>";
-          format_down = "<span background='${palette.base0F}'>  </span><span background='${palette.base05}'> Disconnected </span>";
+          format_up = "<span background='${palette.base0C}'>   </span><span background='${palette.base05}'> %ip </span>";
+          format_down = "<span background='${palette.base0C}'>   </span><span background='${palette.base05}'> Disconnected </span>";
         };
       };
       "battery all" = {
         position = 6;
         settings = {
-          format = "<span background='${palette.base0E}'> %status </span><span background='${palette.base05}'> %percentage Bat </span>";
-          format_down = "<span background='${palette.base0E}'></span><span background='${palette.base05}'> No battery </span>";
+          format = "<span background='${palette.base0D}'> %status </span><span background='${palette.base05}'> %percentage Bat </span>";
+          format_down = "<span background='${palette.base0D}'>   </span><span background='${palette.base05}'> No battery </span>";
           last_full_capacity = true;
           integer_battery_capacity = true;
-          status_chr = "";
-          status_bat = ""; # discharging
-          status_unk = "";
-          status_full = "";
+          status_chr = " ";
+          status_bat = " "; # discharging
+          status_unk = " ";
+          status_full = " ";
           low_threshold = 15;
           threshold_type = "time";
         };
@@ -276,8 +275,8 @@ in {
       "volume master" = {
         position = 7;
         settings = {
-          format = "<span background='${extra1}'>  </span><span background='${palette.base05}'> %volume </span>";
-          format_muted = "<span background='${extra1}'>  </span><span background='${palette.base05}'> Muted </span>";
+          format = "<span background='${palette.base0F}'>   </span><span background='${palette.base05}'> %volume </span>";
+          format_muted = "<span background='${palette.base0F}'>   </span><span background='${palette.base05}'> Muted </span>";
           device = "default";
           mixer = "Master";
           mixer_idx = 0;
@@ -286,7 +285,7 @@ in {
       "time" = {
         position = 8;
         settings = {
-          format = "<span background='${palette.base08}'>  </span><span background='${palette.base05}'> %Y-%m-%d %H:%M:%S %s </span>";
+          format = "<span background='${palette.base0E}'>   </span><span background='${palette.base05}'> %Y-%m-%d %H:%M:%S %s </span>";
         };
       };
     };
