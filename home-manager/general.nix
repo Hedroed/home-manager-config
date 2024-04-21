@@ -12,6 +12,7 @@
     clipit
 
     keepassxc
+    borgbackup
 
     # utils
     coreutils
