@@ -6,6 +6,7 @@ in
   users.users.hedroed = {
     isNormalUser = true;
     shell = pkgs.zsh;
+    ignoreShellProgramCheck = true;
     extraGroups = [
       "wheel"
       "video"
