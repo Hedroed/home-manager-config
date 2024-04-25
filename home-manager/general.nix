@@ -25,6 +25,7 @@
     ripgrep
     vim
     autojump
+    imv
 
     inputs.goldvalley
 

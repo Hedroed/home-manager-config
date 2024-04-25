@@ -75,6 +75,17 @@
     passwordAuthentication = true;
   };
 
+  services.gnome.gnome-keyring.enable = true;
+
+  # rtkit is optional but recommended
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+  };
+
   # used by GTK in home-manager
   programs.dconf.enable = true;
 
@@ -91,4 +102,6 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.11";
+
+  sound.enable = true;
 }

@@ -9,5 +9,6 @@
     enable = true;
     cycle = true;
     theme = "theme.rasi";
+    plugins = [ pkgs.rofi-calc ];
   };
 }

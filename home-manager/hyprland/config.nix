@@ -115,7 +115,7 @@
   bind = $mainMod SHIFT, Q, killactive,
   bind = $mainMod, space, togglefloating,
   bind = $mainMod, f, fullscreen,
-  bind = $mainMod, D, exec, ${pkgs.rofi}/bin/rofi -show drun
+  bind = $mainMod, D, exec, rofi -show drun
   bind = $mainMod SHIFT, e, exec, power-menu
   bind = $mainMod SHIFT, r, exec, screen-recorder-toggle
 
@@ -128,6 +128,12 @@
   bind = $mainMod, right, movefocus, r
   bind = $mainMod, up, movefocus, u
   bind = $mainMod, down, movefocus, d
+
+  # Move
+  bind = $mainMod SHIFT, left, movewindow, l
+  bind = $mainMod SHIFT, right, movewindow, r
+  bind = $mainMod SHIFT, up, movewindow, u
+  bind = $mainMod SHIFT, down, movewindow, d
 
   # Switch workspaces with mainMod + [0-9]
   bind = SUPER,ampersand,workspace,01
