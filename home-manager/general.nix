@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, ... }:
 {
   home.packages = with pkgs; [
     firefox
@@ -13,21 +13,24 @@
 
     keepassxc
     borgbackup
+    evince
 
     # utils
     coreutils
     inetutils
     bat
+    file
     htop
     jq
     zip
     unzip
     ripgrep
     vim
-    autojump
+    zoxide
     imv
+    xdg-utils
 
-    inputs.goldvalley
+    pkgs.inputs.goldvalley.default
 
     # programming
     python310
@@ -98,7 +101,7 @@
           "sudo"
           "docker"
           "common-aliases"
-          "autojump"
+          "zoxide"
         ];
       };
   };

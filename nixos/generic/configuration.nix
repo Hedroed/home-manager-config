@@ -32,8 +32,8 @@
   services.openssh = {
     enable = true;
     # Forbid root login through SSH.
-    permitRootLogin = "no";
-    passwordAuthentication = true;
+    PermitRootLogin = "no";
+    PasswordAuthentication = true;
   };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion

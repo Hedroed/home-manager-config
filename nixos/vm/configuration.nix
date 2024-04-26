@@ -69,8 +69,8 @@
   services.openssh = {
     enable = true;
     # Forbid root login through SSH.
-    permitRootLogin = "no";
-    passwordAuthentication = true;
+    PermitRootLogin = "no";
+    PasswordAuthentication = true;
   };
 
   # used by GTK in home-manager
