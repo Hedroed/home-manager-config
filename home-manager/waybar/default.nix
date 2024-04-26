@@ -12,7 +12,6 @@
 
         layer = "top";
         position = "top";
-        height = 8;
         margin-left = 10;
         margin-right = 10;
         margin-top = 2;
@@ -102,7 +101,7 @@ window#waybar.hidden {
   padding: 2px 10px;
   background-color: #252733;
   border-radius: 8px;
-  font-size: 18.5px;
+  font-size: 14px;
 
   margin-left: 4px;
   margin-right: 4px;
@@ -156,7 +155,7 @@ window#waybar.hidden {
   padding-right: 18px;
   padding-left: 14px;
 
-  font-size: 22px;
+  font-size: 16px;
 
   color: #7a95c9;
 
@@ -171,7 +170,7 @@ window#waybar.hidden {
   background-color: #252733;
   padding: 0em 2em;
 
-  font-size: 20px;
+  font-size: 14px;
 
   padding-left: 7.5px;
   padding-right: 7.5px;
@@ -181,27 +180,25 @@ window#waybar.hidden {
 
   margin-top: 7px;
   margin-bottom: 7px;
-
-  font-size: 20px;
 }
 
 #pulseaudio {
   color: #81A1C1;
   padding-left: 9px;
-  font-size: 22px;
+  font-size: 16px;
 }
 
 #pulseaudio.muted {
   color: #fb958b;
   padding-left: 9px;
-  font-size: 22px;
+  font-size: 16px;
 }
 
 #backlight {
   color: #8a909e;
   padding-right: 5px;
   padding-left: 8px;
-  font-size: 21.2px;
+  font-size: 16px;
 }
 
 #network {
@@ -210,7 +207,7 @@ window#waybar.hidden {
   border-radius: 8px 0px 0px 8px;
   padding-left: 12px;
   padding-right: 14px;
-  font-size: 20px;
+  font-size: 14px;
 }
 
 #network.disconnected {
@@ -221,7 +218,7 @@ window#waybar.hidden {
   color: #8fbcbb;
   border-radius: 0px 8px 8px 0px;
   padding-right: 2px;
-  font-size: 22px;
+  font-size: 16px;
 }
 
 #battery.critical,
@@ -231,18 +228,18 @@ window#waybar.hidden {
   color: #8fbcbb;
   padding-left: 6px;
   padding-right: 12px;
-  font-size: 22px;
+  font-size: 16px;
 }
 
-#battery.charging { 
-  font-size: 18px;
+#battery.charging {
+  font-size: 16px;
   padding-right: 13px;
   padding-left: 4px;
 }
 
 #battery.full,
 #battery.plugged {
-  font-size: 22.5px;
+  font-size: 16px;
   padding-right: 10px;
 }
 
@@ -332,8 +329,7 @@ label:focus {
 }
 
 #custom-weather {
-  font-family: Iosevka Nerd Font;
-  font-size: 19px;
+  font-size: 16px;
   color: #8a909e;
 }
 

@@ -1,6 +1,6 @@
 { config, pkgs, lib, inputs, ... }:
 let
-  palette = builtins.mapAttrs (name: value: "#${value}") config.colorscheme.colors; # Add leading '#'
+  palette = builtins.mapAttrs (name: value: "#${value}") config.colorscheme.palette; # Add leading '#'
 
   i3exit = pkgs.writeShellScriptBin "i3exit"
     ''

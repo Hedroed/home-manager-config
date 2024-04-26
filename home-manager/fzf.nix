@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 let
-  palette = builtins.mapAttrs (name: value: "#${value}") config.colorscheme.colors; # Add leading '#'
+  palette = builtins.mapAttrs (name: value: "#${value}") config.colorscheme.palette; # Add leading '#'
 in{
   programs.fzf = {
     enable = true;
