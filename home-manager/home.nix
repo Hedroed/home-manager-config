@@ -8,6 +8,7 @@
     ./gtk.nix
     ./qt.nix
     ./hyprland
+    ./waybar
     ./i3.nix
     ./rofi
     ./kitty.nix
