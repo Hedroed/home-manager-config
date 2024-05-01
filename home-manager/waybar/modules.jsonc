@@ -170,8 +170,8 @@
         "on-click-middle": "",
         "on-click-right": "",
         "on-update": "",
-        "on-scroll-up": "~/.config/hypr/scripts/Brightness.sh --inc",
-        "on-scroll-down": "~/.config/hypr/scripts/Brightness.sh --dec",
+        "on-scroll-up": "brightnessctl --min-value=1000 set +10%",
+        "on-scroll-down": "brightnessctl --min-value=1000 set 10%-",
         "smooth-scrolling-threshold": 1,
     },
 
@@ -274,7 +274,7 @@
 
     "hyprland/window": {
         "format": "{}",
-        "max-length": 40,
+        "max-length": 60,
         "separate-outputs": true,
         "offscreen-css" : true,
         "offscreen-css-text": "(inactive)",
@@ -487,14 +487,6 @@
         "on-scroll-up": "~/.config/hypr/scripts/volume_control.sh --inc",
         "on-scroll-down": "~/.config/hypr/scripts/volume_control.sh --dec",
         "smooth-scrolling-threshold": 1,
-    },
-
-    "custom/power": {
-        "format": "⏻ ",
-        "exec": "echo ; echo 󰟡 power // blur",
-        "on-click": "~/.config/hypr/scripts/wlogout.sh",
-        "interval" : 86400, // once every day
-        "tooltip": true,
     },
 
     "custom/swaync": {

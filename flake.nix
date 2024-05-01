@@ -21,6 +21,10 @@
     nixgl.inputs.nixpkgs.follows = "nixpkgs";
 
     hyprland.url = "github:hyprwm/hyprland/v0.39.1";
+    # hyprland.inputs.nixpkgs.follows = "nixpkgs";
+
+    hyprlock.url = "github:hyprwm/hyprlock/v0.3.0";
+    hyprlock.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs:

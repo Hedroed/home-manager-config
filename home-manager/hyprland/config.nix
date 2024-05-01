@@ -111,13 +111,14 @@
 
   $mainMod = SUPER
 
-  bind = $mainMod, Return, exec, xterm
+  bind = $mainMod, Return, exec, kitty
   bind = $mainMod SHIFT, Q, killactive,
   bind = $mainMod, space, togglefloating,
   bind = $mainMod, f, fullscreen,
   bind = $mainMod, D, exec, rofi -show drun
   bind = $mainMod SHIFT, e, exec, power-menu
   bind = $mainMod SHIFT, r, exec, screen-recorder-toggle
+  bind = $mainMod, l, exec, hyprlock
 
   bind = $mainMod, P, pseudo,
   bind = $mainMod, e, togglesplit

@@ -3,6 +3,12 @@
   home.file = {
     ".config/waybar/modules".source = ./modules.jsonc;
   };
+
+  home.packages = [
+    pkgs.brightnessctl
+    pkgs.pavucontrol
+  ];
+
   programs.waybar = {
     enable = true;
     systemd.enable = true;
@@ -37,18 +43,23 @@
           "custom/separator#blank"
           "custom/power"
         ];
-      };
 
-      "custom/power" = {
-        format =" ";
-        icon-size = 20;
-        on-click = "wlogout -C $HOME/.config/wlogout/nova.css -l $HOME/.config/wlogout/layout -b 5 -B 400 -T 400";
-        tooltip = false;
-      };
+        "custom/power" = {
+          format =" ";
+          icon-size = 20;
+          on-click = "${pkgs.wlogout}/bin/wlogout --protocol layer-shell -b 4 -T 400 -B 400";
+          tooltip = false;
+        };
 
-      "clock" = {
-        format = "{:%H:%M - %d/%b}"; # 24h
-        tooltip = false;
+        "clock" = {
+          format = "{:%H:%M - %d %b}"; # 24h
+          tooltip = false;
+        };
+
+        "backlight" = {
+          "on-scroll-up" = "${pkgs.brightnessctl}/bin/brightnessctl --min-value=1000 set +10%";
+          "on-scroll-down" = "${pkgs.brightnessctl}/bin/brightnessctl --min-value=1000 set 10%-";
+        };
       };
     };
 
@@ -105,9 +116,6 @@ window#waybar.hidden {
 
   margin-left: 4px;
   margin-right: 4px;
-
-  margin-top: 8.5px;
-  margin-bottom: 8.5px;
 }
 
 #cpu {
@@ -158,9 +166,6 @@ window#waybar.hidden {
   font-size: 16px;
 
   color: #7a95c9;
-
-  margin-top: 8.5px;
-  margin-bottom: 8.5px;
 }
 
 #backlight,
@@ -174,12 +179,6 @@ window#waybar.hidden {
 
   padding-left: 7.5px;
   padding-right: 7.5px;
-
-  padding-top: 3px;
-  padding-bottom: 3px;
-
-  margin-top: 7px;
-  margin-bottom: 7px;
 }
 
 #pulseaudio {
@@ -262,16 +261,12 @@ window#waybar.hidden {
   color: #ecd3a0;
   padding: 0 15px 0 15px;
   margin-left: 7px;
-  margin-top: 7px;
-  margin-bottom: 7px;
 }
 
 #clock {
   color: #8a909e;
   font-family: Iosevka Nerd Font;
   font-weight: bold;
-  margin-top: 7px;
-  margin-bottom: 7px;
 }
 
 #custom-power-menu {
@@ -279,8 +274,6 @@ window#waybar.hidden {
   margin-right: 12px;
   border-radius: 8px;
   padding: 0 6px 0 6.8px;
-  margin-top: 7px;
-  margin-bottom: 7px;
 }
 
 tooltip {
@@ -301,8 +294,6 @@ label:focus {
 
 #tray {
   margin-right: 8px;
-  margin-top: 7px;
-  margin-bottom: 7px;
   font-size: 30px;
 }
 

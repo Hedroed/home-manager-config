@@ -38,6 +38,9 @@
     # nix
     nixpkgs-fmt
 
+    # fallback
+    xterm
+
     # fonts
     (nerdfonts.override { fonts = [ "FiraCode" ]; })
     lucide-fonts

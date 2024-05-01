@@ -9,6 +9,8 @@
     ./qt.nix
     ./hyprland
     ./waybar
+    ./wlogout
+    ./swayidle.nix
     ./i3.nix
     ./rofi
     ./kitty.nix

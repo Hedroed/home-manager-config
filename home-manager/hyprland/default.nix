@@ -11,13 +11,17 @@
   };
 
   home.packages = with pkgs; [
-    # inputs.hyprwm-contrib.grimblast
+    pkgs.inputs.hyprlock.hyprlock
     swaybg
     swayidle
-    wofi
     # TODO
+    # inputs.hyprwm-contrib.grimblast
     # inputs.hyprland.xdg-desktop-portal-hyprland
   ];
+
+  home.file = {
+    ".config/hypr/hyprlock.conf".source = ./hyprlock.conf;
+  };
 
   programs = {
     fish.loginShellInit = ''

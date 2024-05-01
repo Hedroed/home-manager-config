@@ -7,6 +7,7 @@
 
   programs.rofi = {
     enable = true;
+    package = pkgs.rofi-wayland;
     cycle = true;
     theme = "theme.rasi";
     plugins = [ pkgs.rofi-calc ];
