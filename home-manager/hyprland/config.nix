@@ -131,10 +131,10 @@
   bind = $mainMod, down, movefocus, d
 
   # Move
-  bind = $mainMod SHIFT, left, movewindow, l
-  bind = $mainMod SHIFT, right, movewindow, r
-  bind = $mainMod SHIFT, up, movewindow, u
-  bind = $mainMod SHIFT, down, movewindow, d
+  bind = $mainMod SHIFT, left, movewindoworgroup, l
+  bind = $mainMod SHIFT, right, movewindoworgroup, r
+  bind = $mainMod SHIFT, up, movewindoworgroup, u
+  bind = $mainMod SHIFT, down, movewindoworgroup, d
 
   # Switch workspaces with mainMod + [0-9]
   bind = SUPER,ampersand,workspace,01
