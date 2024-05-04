@@ -3,10 +3,16 @@
 My home manager config
 
 ```
-home-manager switch --flake '.#hedroed
-
+home-manager switch --flake ".#hedroed@standalone"
 ```
 
+## Available configurations
+
+| name | usage |
+| --- | --- |
+| hedroed@standalone | Standalone installation without nixos |
+| hedroed@standalone | Nixos and home-manager install |
+| ... | ... |
 
 ## Install
 
@@ -18,7 +24,7 @@ Once the system in installed follow these steps.
 Packages which must be installed in root are:
 
 - Xorg
-- ...
+- i3 or hyprland
 
 ### 2. Install nix and home-manager
 
@@ -27,37 +33,35 @@ https://nixos.org/download.html
 https://nix-community.github.io/home-manager/index.html#sec-flakes-standalone-stable
 
 
-Edit configuration `home.nix` and change the username.
-
 ```sh
-nix run github:hedroed/home-manager-config#homeConfigurations.hedroed.activationPackage
+nix develop
 ```
-
-### 3. Display Manager
-
-Install any display manager.
-
-I suggest `SDDM` or `lightdm`.
-
-Create a `/usr/share/xsessions/xsession.desktop`.
-
-```ini
-[Desktop Entry]
-Name=X session
-Comment=X session, controlled by your ~/.xsession
-Exec=/etc/X11/Xsession
-TryExec=/etc/X11/Xsession
-Type=Application
-X-LightDM-DesktopName=X session
-DesktopNames=X session
-```
-
-It will make the link between your home .xsession file and the display manager.
-
-source: http://skybert.net/linux/add-generic-x-session-to-sddm-menu/
 
 ## documentation
 
 - https://nix-community.github.io/home-manager/
 - https://nix-community.github.io/home-manager/options.html
 - https://github.com/nix-community/home-manager/tree/master/modules
+
+
+## Nord palette
+
+| code | color |
+| --- | --- |
+| base00 | #2E3440 |
+| base00 | #2E3440 |
+| base01 | #3B4252 |
+| base02 | #434C5E |
+| base03 | #4C566A |
+| base04 | #D8DEE9 |
+| base05 | #E5E9F0 |
+| base06 | #ECEFF4 |
+| base07 | #8FBCBB |
+| base08 | #BF616A |
+| base09 | #D08770 |
+| base0A | #EBCB8B |
+| base0B | #A3BE8C |
+| base0C | #88C0D0 |
+| base0D | #81A1C1 |
+| base0E | #B48EAD |
+| base0F | #5E81AC |
