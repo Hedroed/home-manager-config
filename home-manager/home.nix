@@ -18,6 +18,8 @@
     ./vscode.nix
     ./fzf.nix
     ./firefox.nix
+    ./cozy.nix
+    ./goldvalley.nix
   ] ++ (builtins.attrValues outputs.homeManagerModules);
 
   colorscheme = inputs.nix-colors.colorSchemes.nord;
@@ -56,5 +58,5 @@
   #systemd.user.startServices = "sd-switch";
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  home.stateVersion = "22.11";
+  home.stateVersion = "23.11";
 }

@@ -8,8 +8,9 @@
     gimp
     inkscape
 
-    nitrogen
-    clipit
+    # nitrogen
+    hyprpaper
+    # clipit
 
     keepassxc
     borgbackup
@@ -26,11 +27,8 @@
     unzip
     ripgrep
     vim
-    zoxide
     imv
     xdg-utils
-
-    pkgs.inputs.goldvalley.default
 
     # programming
     python310
@@ -61,6 +59,7 @@
 
   home.shellAliases = {
     open = "xdg-open";
+    sysu = "systemctl --user";
   };
 
   programs.git = {
@@ -104,9 +103,16 @@
           "sudo"
           "docker"
           "common-aliases"
-          "zoxide"
         ];
       };
+  };
+
+  programs.zoxide = {
+    enable = true;
+    enableZshIntegration = true;
+    options = [
+      "--cmd cd"
+    ];
   };
 
   programs.starship = {
@@ -126,6 +132,10 @@
     enable = true;
     defaultCacheTtl = 1800;
     enableSshSupport = true;
+  };
+
+  services.network-manager-applet = {
+    enable = true;
   };
 
   services.syncthing = {

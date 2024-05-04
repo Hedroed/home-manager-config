@@ -25,7 +25,7 @@
       follow_mouse = 1
 
       touchpad {
-          natural_scroll = yes
+          natural_scroll = no
       }
 
       sensitivity = 0 # -1.0 - 1.0, 0 means no modification.
@@ -135,6 +135,8 @@
   bind = $mainMod SHIFT, right, movewindoworgroup, r
   bind = $mainMod SHIFT, up, movewindoworgroup, u
   bind = $mainMod SHIFT, down, movewindoworgroup, d
+  
+  bind = $mainMod, Tab, cyclenext,
 
   # Switch workspaces with mainMod + [0-9]
   bind = SUPER,ampersand,workspace,01

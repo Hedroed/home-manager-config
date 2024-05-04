@@ -25,6 +25,9 @@
 
     hyprlock.url = "github:hyprwm/hyprlock/v0.3.0";
     hyprlock.inputs.nixpkgs.follows = "nixpkgs";
+
+    hyprpaper.url = "github:hyprwm/hyprpaper";
+    hyprpaper.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs:
@@ -81,6 +84,7 @@
           modules = [
             # > Our main home-manager configuration file <
             ./home-manager/home.nix
+            inputs.hyprpaper.homeManagerModules.default
           ];
         };
         "hedroed@standalone" = home-manager.lib.homeManagerConfiguration {

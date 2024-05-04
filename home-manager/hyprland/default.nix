@@ -41,6 +41,15 @@
     '';
   };
 
+  services.hyprpaper = {
+    enable = true;
+    ipc = false;
+    preloads = [];
+    wallpapers = [
+       "eDP-1, ${config.home.homeDirectory}/tmp/lock.png"
+    ];
+  };
+
   wayland.windowManager.hyprland = {
     enable = true;
     package = pkgs.inputs.hyprland.default;
