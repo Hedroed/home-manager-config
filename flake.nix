@@ -87,7 +87,6 @@
           modules = [
             # > Our main home-manager configuration file <
             ./home-manager/home.nix
-            inputs.hyprpaper.homeManagerModules.default
           ];
         };
         "hedroed@standalone" = home-manager.lib.homeManagerConfiguration {
