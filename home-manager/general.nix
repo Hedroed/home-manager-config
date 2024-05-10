@@ -35,6 +35,8 @@
 
     # nix
     nixpkgs-fmt
+    nix-index
+    inputs.nix-alien.nix-alien
 
     # fallback
     xterm

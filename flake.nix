@@ -28,6 +28,9 @@
 
     hyprpaper.url = "github:hyprwm/hyprpaper";
     hyprpaper.inputs.nixpkgs.follows = "nixpkgs";
+
+    nix-alien.url = "github:thiagokokada/nix-alien";
+    nix-alien.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs:
