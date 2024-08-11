@@ -2,7 +2,7 @@
 
 let
   inherit (config.colorscheme) palette;
-  lock = "${pkgs.inputs.hyprlock.hyprlock}/bin/hyprlock";
+  lock = "${pkgs.hyprlock}/bin/hyprlock";
 in
 {
   programs.wlogout = {

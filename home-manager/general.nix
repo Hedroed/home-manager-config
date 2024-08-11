@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 {
   home.packages = with pkgs; [
     firefox
@@ -9,7 +9,6 @@
     inkscape
 
     # nitrogen
-    hyprpaper
     # clipit
 
     keepassxc
@@ -51,7 +50,7 @@
   home.sessionVariables = {
     EDITOR = "vim";
     SUDO_EDITOR = "vim";
-    XDG_DATA_DIRS = "${config.home.homeDirectory}/.nix-profile/share:${config.home.homeDirectory}/.local/share:/usr/share";
+    XDG_DATA_DIRS = lib.mkDefault "${config.home.homeDirectory}/.nix-profile/share:${config.home.homeDirectory}/.local/share:/usr/share";
   };
 
   # Install the gitconfig file, as .gitconfig in the home directory
@@ -95,7 +94,7 @@
     export WORKON_HOME=~/.virtualenvs
     export VIRTUALENVWRAPPER_PYTHON=${pkgs.python312}/bin/python
     mkdir -p $WORKON_HOME
-    source ${pkgs.python310Packages.virtualenvwrapper}/bin/virtualenvwrapper.sh
+    source ${pkgs.python312Packages.virtualenvwrapper}/bin/virtualenvwrapper.sh
     '';
 
     oh-my-zsh = {

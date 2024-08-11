@@ -3,7 +3,7 @@
 
   inputs = {
     # Nixpkgs
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
     # You can access packages and modules from different nixpkgs revs at the same time.
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
@@ -11,7 +11,7 @@
     nix-colors.url = "github:misterio77/nix-colors";
 
     # Home manager
-    home-manager.url = "github:nix-community/home-manager/release-23.11";
+    home-manager.url = "github:nix-community/home-manager/release-24.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     goldvalley.url = "github:hedroed/goldvalley";
@@ -19,15 +19,6 @@
 
     nixgl.url = "github:guibou/nixGL";
     nixgl.inputs.nixpkgs.follows = "nixpkgs";
-
-    hyprland.url = "github:hyprwm/hyprland/v0.39.1";
-    # hyprland.inputs.nixpkgs.follows = "nixpkgs";
-
-    hyprlock.url = "github:hyprwm/hyprlock/v0.3.0";
-    hyprlock.inputs.nixpkgs.follows = "nixpkgs";
-
-    hyprpaper.url = "github:hyprwm/hyprpaper";
-    hyprpaper.inputs.nixpkgs.follows = "nixpkgs";
 
     nix-alien.url = "github:thiagokokada/nix-alien";
     nix-alien.inputs.nixpkgs.follows = "nixpkgs";

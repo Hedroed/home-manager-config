@@ -4,7 +4,7 @@
   config,
   ...
 }: let
-  lock = "${pkgs.inputs.hyprlock.hyprlock}/bin/hyprlock";
+  lock = "${pkgs.hyprlock}/bin/hyprlock";
   # pgrep = "${pkgs.procps}/bin/pgrep";
   pactl = "${pkgs.pulseaudio}/bin/pactl";
   hyprctl = "${config.wayland.windowManager.hyprland.package}/bin/hyprctl";
