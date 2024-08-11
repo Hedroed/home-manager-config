@@ -14,7 +14,7 @@
     ./i3.nix
     ./rofi
     ./kitty.nix
-    ./locker.nix
+    # ./locker.nix
     ./vscode.nix
     ./fzf.nix
     ./firefox.nix

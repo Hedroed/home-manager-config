@@ -2,9 +2,7 @@
 
 let
   inherit (config.colorscheme) palette;
-  # kitty-xterm = pkgs.writeShellScriptBin "xterm" ''
-  #   ${config.programs.kitty.package}/bin/kitty -1 "$@"
-  # '';
+  lock = "${pkgs.inputs.hyprlock.hyprlock}/bin/hyprlock";
 in
 {
   programs.wlogout = {
@@ -31,7 +29,7 @@ in
       }
       {
           label = "lock";
-          action = "hyprlock";
+          action = "${lock}/bin/hyprlock --immediate --config $HOME/.config/hypr/hyprlock.conf";
           text = "Lock";
           keybind = "l";
       }

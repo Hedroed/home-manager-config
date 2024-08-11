@@ -31,7 +31,7 @@
     xdg-utils
 
     # programming
-    python310
+    python312
 
     # nix
     nixpkgs-fmt
@@ -93,7 +93,7 @@
 
     # Virtualenv wrapper
     export WORKON_HOME=~/.virtualenvs
-    export VIRTUALENVWRAPPER_PYTHON=${pkgs.python310}/bin/python
+    export VIRTUALENVWRAPPER_PYTHON=${pkgs.python312}/bin/python
     mkdir -p $WORKON_HOME
     source ${pkgs.python310Packages.virtualenvwrapper}/bin/virtualenvwrapper.sh
     '';

@@ -46,9 +46,9 @@
       spellCheckerFrench
       atomKeymap
     ]) ++ (with pkgs.unstable.vscode-extensions; [
+      bbenoist.nix
       rust-lang.rust-analyzer
       ms-python.vscode-pylance
-      bbenoist.nix
       elmtooling.elm-ls-vscode
       eamodio.gitlens
       mhutchie.git-graph
@@ -57,6 +57,7 @@
       naumovs.color-highlight
       bradlc.vscode-tailwindcss
       streetsidesoftware.code-spell-checker
+      tamasfe.even-better-toml
     ]);
 
     userSettings = {
@@ -121,7 +122,7 @@
           "--max-line-length=160"
       ];
       "python.showStartPage" = false;
-      "python.defaultInterpreterPath" = "/usr/bin/python";
+      "python.defaultInterpreterPath" = "${pkgs.python312}/bin/python";
       "python.venvPath" = "~/.virtualenvs";
       "python.linting.flake8Args" = [
           "--max-line-length=160"

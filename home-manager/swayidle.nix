@@ -30,14 +30,18 @@ in {
   services.swayidle = {
     enable = true;
     systemdTarget = "graphical-session.target";
-    timeouts =
-      # Lock screen
-      [
-        {
-          timeout = lockTime;
-          command = "${lock} --immediate --config $HOME/.config/hypr/hyprlock.conf";
-        }
-      ];
+    events = [
+      {
+        event = "before-sleep";
+        command = "${lock} --immediate --config $HOME/.config/hypr/hyprlock.conf";
+      }
+    ];
+    timeouts = [
+      {
+        timeout = lockTime;
+        command = "${lock} --immediate --config $HOME/.config/hypr/hyprlock.conf";
+      }
+    ];
       # ++
       # # Mute mic
       # (afterLockTimeout {

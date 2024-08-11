@@ -16,6 +16,8 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  boot.supportedFilesystems = [ "ntfs" ];
+
   networking.hostName = "nixoust";
 
   # Configure network proxy if necessary
@@ -70,9 +72,11 @@
   # Enable the OpenSSH daemon.
   services.openssh = {
     enable = true;
-    # Forbid root login through SSH.
-    PermitRootLogin = "no";
-    PasswordAuthentication = true;
+    settings = {
+      # Forbid root login through SSH.
+      PermitRootLogin = "no";
+      PasswordAuthentication = true;
+    };
   };
 
   services.gnome.gnome-keyring.enable = true;
