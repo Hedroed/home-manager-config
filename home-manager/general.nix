@@ -15,6 +15,8 @@
     borgbackup
     evince
 
+    signal-desktop
+
     # utils
     coreutils
     inetutils
@@ -41,7 +43,7 @@
     xterm
 
     # fonts
-    (nerdfonts.override { fonts = [ "FiraCode" ]; })
+    nerd-fonts.fira-code
     lucide-fonts
     noto-fonts
     noto-fonts-emoji
@@ -84,7 +86,7 @@
   programs.zsh = {
     enable = true;
 
-    initExtra = ''
+    initContent = ''
     # Nix setup
     if [ -e ~/.nix-profile/etc/profile.d/nix.sh ]; then
       source ~/.nix-profile/etc/profile.d/nix.sh

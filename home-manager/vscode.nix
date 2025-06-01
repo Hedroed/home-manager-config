@@ -39,19 +39,24 @@
   {
     enable = true;
     package = pkgs.unstable.vscode;
-    enableExtensionUpdateCheck = true;
-    enableUpdateCheck = true;
-    extensions = (with myExtensions; [
+    profiles.default.enableExtensionUpdateCheck = true;
+    profiles.default.enableUpdateCheck = true;
+    profiles.default.extensions = (with myExtensions; [
       textPastry
       spellCheckerFrench
       atomKeymap
     ]) ++ (with pkgs.unstable.vscode-extensions; [
       bbenoist.nix
       rust-lang.rust-analyzer
-      ms-python.vscode-pylance
+      
+      ms-python.python
+      charliermarsh.ruff
+      
       elmtooling.elm-ls-vscode
+      
       eamodio.gitlens
       mhutchie.git-graph
+      
       arcticicestudio.nord-visual-studio-code
       pkief.material-icon-theme
       naumovs.color-highlight
@@ -60,7 +65,7 @@
       tamasfe.even-better-toml
     ]);
 
-    userSettings = {
+    profiles.default.userSettings = {
       "workbench.startupEditor" = "newUntitledFile";
       "workbench.colorTheme" = colorTheme;
       "workbench.iconTheme" = iconTheme;
@@ -124,10 +129,6 @@
       "python.showStartPage" = false;
       "python.defaultInterpreterPath" = "${pkgs.python312}/bin/python";
       "python.venvPath" = "~/.virtualenvs";
-      "python.linting.flake8Args" = [
-          "--max-line-length=160"
-      ];
-      "python.linting.mypyEnabled" = true;
       "python.dataScience.enabled" = false;
 
       "vetur.format.options.useTabs" = false;
@@ -183,6 +184,6 @@
         "editor.defaultFormatter" = "rust-lang.rust-analyzer";
       };
     };
-    userTasks = { };
+    profiles.default.userTasks = { };
   };
 }

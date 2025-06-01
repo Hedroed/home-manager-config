@@ -19,7 +19,7 @@
     ./fzf.nix
     ./firefox.nix
     ./cozy.nix
-    ./goldvalley.nix
+    # ./goldvalley.nix
   ] ++ (builtins.attrValues outputs.homeManagerModules);
 
   colorscheme = inputs.nix-colors.colorSchemes.nord;
@@ -27,8 +27,9 @@
   nix = {
     package = lib.mkDefault pkgs.nix;
     settings = {
-      experimental-features = [ "nix-command" "flakes" "repl-flake" ];
+      experimental-features = [ "nix-command" "flakes" ];
       warn-dirty = false;
+      access-tokens = "XXX";
     };
   };
 

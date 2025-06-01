@@ -3,7 +3,7 @@
 /* ---- Configuration ---- */
 
 configuration {
-    modi:                       "drun,filebrowser,calc";
+    modi:                       "drun,filebrowser";
     show-icons:                 true;
     display-calc:               "Calc";
     display-drun:               "Apps";
