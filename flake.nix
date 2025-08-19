@@ -22,6 +22,9 @@
 
     nix-alien.url = "github:thiagokokada/nix-alien";
     nix-alien.inputs.nixpkgs.follows = "nixpkgs";
+
+    wayland-displays.url = "github:heyzec/wayland-displays";
+    wayland-displays.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs:

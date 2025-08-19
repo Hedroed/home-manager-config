@@ -11,6 +11,8 @@ in
       "wheel"
       "video"
       "audio"
+      "dialout"
+      "uucp"
     ] ++ ifTheyExist [
       "network"
       "wireshark"

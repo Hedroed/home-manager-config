@@ -8,6 +8,7 @@
     ../users/hedroed.nix
 
     ../optionals/greetd.nix
+    ../optionals/docker.nix
   ];
 
   services.greetd.settings.default_session.user = "hedroed";
@@ -47,9 +48,9 @@
   };
 
   # Configure keymap
-  services.xserver = {
+  services.xserver.xkb = {
     layout = "fr";
-    xkbVariant = "";
+    variant = "";
   };
   console.keyMap = "fr";
 
@@ -106,6 +107,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.11";
-
-  sound.enable = true;
 }

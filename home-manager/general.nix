@@ -16,6 +16,7 @@
     evince
 
     signal-desktop
+    inputs.wayland-displays.default
 
     # utils
     coreutils
